@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PeggySPA｜AI 招商文案軍師</title>
+    <title>PeggySPA｜無限招商文案軍師</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
@@ -12,139 +12,123 @@
         .glass-card { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border: 1px solid rgba(230, 0, 18, 0.1); }
         .style-btn { transition: all 0.3s; border: 2px solid #f3f4f6; }
         .style-btn.active { background: #e60012; color: white; border-color: #e60012; box-shadow: 0 4px 12px rgba(230, 0, 18, 0.3); transform: translateY(-2px); }
-        .copy-btn:active { transform: scale(0.9); }
-        .result-box { min-height: 250px; transition: all 0.5s ease; }
+        .result-box { min-height: 280px; transition: all 0.3s ease; }
         .scrollbar-hide::-webkit-scrollbar { display: none; }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+        .generating { animation: pulse 0.4s infinite; }
     </style>
 </head>
 <body class="p-4 md:p-8 pb-32">
 
 <div class="max-w-7xl mx-auto">
     <header class="text-center mb-10">
-        <h1 class="text-4xl font-black text-[#e60012] mb-2 tracking-tighter">🔥 PeggySPA 招商文案生成器</h1>
-        <p class="text-gray-500 font-medium text-xs tracking-[0.2em] uppercase">Peggy's Instant Copywriting System</p>
+        <h1 class="text-4xl font-black text-[#e60012] mb-2 tracking-tighter">🔥 PeggySPA 無限文案生成器</h1>
+        <p class="text-gray-400 font-medium text-xs tracking-[0.3em] uppercase">Peggy's Infinite AI Copy Engine</p>
     </header>
 
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
         <div class="lg:col-span-4 space-y-6">
-            <div class="glass-card p-8 rounded-[2rem] shadow-xl border-2 border-white">
+            <div class="glass-card p-8 rounded-[2.5rem] shadow-xl border-2 border-white">
                 <h3 class="text-xl font-black mb-6 flex items-center gap-2 text-gray-700">
-                    <i class="fa-solid fa-wand-magic-sparkles text-red-500"></i> 第一步：選擇風格
+                    <i class="fa-solid fa-dice text-red-500"></i> 點擊風格・無限生成
                 </h3>
                 <div class="grid grid-cols-2 gap-4" id="styleGroup">
-                    <button class="style-btn p-4 rounded-2xl text-sm font-black active" onclick="selectStyle(this, '激勵')">溫暖激勵</button>
-                    <button class="style-btn p-4 rounded-2xl text-sm font-black" onclick="selectStyle(this, '犀利')">犀利直球</button>
-                    <button class="style-btn p-4 rounded-2xl text-sm font-black" onclick="selectStyle(this, '數據')">數據獲利</button>
-                    <button class="style-btn p-4 rounded-2xl text-sm font-black" onclick="selectStyle(this, '故事')">感性故事</button>
+                    <button class="style-btn p-5 rounded-2xl text-sm font-black active" onclick="generate('激勵')">溫暖激勵</button>
+                    <button class="style-btn p-5 rounded-2xl text-sm font-black" onclick="generate('犀利')">犀利直球</button>
+                    <button class="style-btn p-5 rounded-2xl text-sm font-black" onclick="generate('數據')">數據獲利</button>
+                    <button class="style-btn p-5 rounded-2xl text-sm font-black" onclick="generate('故事')">感性故事</button>
                 </div>
 
-                <div class="mt-10 p-6 bg-red-50 rounded-2xl border border-red-100">
-                    <p class="text-red-800 text-sm font-bold mb-4">💡 操作提示：</p>
-                    <p class="text-red-600 text-xs leading-relaxed">點擊上方風格按鈕，右側欄位將會根據您的選擇「自動產出」不同邏輯的貼文建議。您可以直接修改並複製使用！</p>
+                <div class="mt-10 p-6 bg-white/50 rounded-2xl border border-red-50 italic text-red-400 text-xs leading-loose">
+                    * 提示：同一個按鈕可以「連續點擊」，每次都會組裝出不同的內容組合，讓妳發文不撞詞！
                 </div>
             </div>
         </div>
 
         <div class="lg:col-span-8 grid grid-cols-1 md:grid-cols-3 gap-6">
-            
-            <div class="glass-card rounded-[2rem] shadow-xl overflow-hidden flex flex-col border-t-8 border-blue-600">
-                <div class="p-5 bg-blue-50 flex justify-between items-center border-b border-blue-100">
-                    <span class="font-black text-blue-700"><i class="fa-brands fa-facebook"></i> FB 深度版</span>
-                    <button onclick="copyText('fb')" class="copy-btn bg-white text-blue-600 px-3 py-1 rounded-full text-xs font-bold shadow-sm">複製</button>
-                </div>
-                <div id="fb" contenteditable="true" class="result-box p-6 text-sm leading-relaxed text-gray-600 overflow-y-auto scrollbar-hide font-medium">
-                    請點擊左側風格按鈕開始生成...
-                </div>
+            <div class="glass-card rounded-[2.5rem] shadow-xl overflow-hidden flex flex-col border-t-8 border-blue-600">
+                <div class="p-5 bg-blue-50 flex justify-between items-center"><span class="font-black text-blue-700 text-sm">FB 深度版</span><button onclick="copyText('fb')" class="bg-white px-3 py-1 rounded-full text-[10px] font-bold shadow-sm">複製</button></div>
+                <div id="fb" contenteditable="true" class="result-box p-6 text-sm leading-relaxed text-gray-600 overflow-y-auto scrollbar-hide">點擊按鈕生成...</div>
             </div>
-
-            <div class="glass-card rounded-[2rem] shadow-xl overflow-hidden flex flex-col border-t-8 border-pink-500">
-                <div class="p-5 bg-pink-50 flex justify-between items-center border-b border-pink-100">
-                    <span class="font-black text-pink-700"><i class="fa-brands fa-instagram"></i> IG 質感版</span>
-                    <button onclick="copyText('ig')" class="copy-btn bg-white text-pink-600 px-3 py-1 rounded-full text-xs font-bold shadow-sm">複製</button>
-                </div>
-                <div id="ig" contenteditable="true" class="result-box p-6 text-sm leading-relaxed text-gray-600 overflow-y-auto scrollbar-hide font-medium">
-                    請點擊左側風格按鈕開始生成...
-                </div>
+            <div class="glass-card rounded-[2.5rem] shadow-xl overflow-hidden flex flex-col border-t-8 border-pink-500">
+                <div class="p-5 bg-pink-50 flex justify-between items-center"><span class="font-black text-pink-700 text-sm">IG 質感版</span><button onclick="copyText('ig')" class="bg-white px-3 py-1 rounded-full text-[10px] font-bold shadow-sm">複製</button></div>
+                <div id="ig" contenteditable="true" class="result-box p-6 text-sm leading-relaxed text-gray-600 overflow-y-auto scrollbar-hide">點擊按鈕生成...</div>
             </div>
-
-            <div class="glass-card rounded-[2rem] shadow-xl overflow-hidden flex flex-col border-t-8 border-black">
-                <div class="p-5 bg-gray-50 flex justify-between items-center border-b border-gray-100">
-                    <span class="font-black text-black"><i class="fa-brands fa-threads"></i> Threads</span>
-                    <button onclick="copyText('threads')" class="copy-btn bg-white text-black px-3 py-1 rounded-full text-xs font-bold shadow-sm">複製</button>
-                </div>
-                <div id="threads" contenteditable="true" class="result-box p-6 text-sm leading-relaxed text-gray-600 overflow-y-auto scrollbar-hide font-medium">
-                    請點擊左側風格按鈕開始生成...
-                </div>
+            <div class="glass-card rounded-[2.5rem] shadow-xl overflow-hidden flex flex-col border-t-8 border-black">
+                <div class="p-5 bg-gray-50 flex justify-between items-center"><span class="font-black text-black text-sm">Threads</span><button onclick="copyText('threads')" class="bg-white px-3 py-1 rounded-full text-[10px] font-bold shadow-sm">複製</button></div>
+                <div id="threads" contenteditable="true" class="result-box p-6 text-sm leading-relaxed text-gray-600 overflow-y-auto scrollbar-hide">點擊按鈕生成...</div>
             </div>
-
         </div>
     </div>
 </div>
 
 <script>
-    // 預設文案資料庫
-    const database = {
+    const pool = {
         '激勵': {
-            fb: "【不要讓妳的夢想，只停留在想】✨\n\n妳是否也曾想過，在照顧家庭與孩子之餘，也能擁有一份屬於自己的事業？\n\nPeggySPA 帶來的「遠紅外線熱導儀」，不僅僅是一台儀器，它是美容師轉型、媽媽創業的最強後盾。我們不賣機器，我們提供的是一套完整的「獲利系統」。\n\n當妳決定為自己努力一次，全世界都會為妳開路。妳值得更優雅地賺錢，更自信地生活。\n\n🔥 今日限量諮詢名額剩 3 位，私訊我，讓我陪妳一起寫下創業的故事。",
-            ig: "做自己的光，才不需要借別人的火。✨\n\nPeggySPA 招商中！美容師轉型必看，讓雙手不再勞累，讓收入倍速增長。💪\n\n📸 Reels 建議：拍攝儀器在臉部溫熱運行的質感近點，配上鋼琴輕音樂。\n\n#PeggySPA #創業女性 #美容師轉型 #熱導儀 #自信美",
-            threads: "2026年了，還在靠「體力」賺辛苦錢嗎？\n\n聰明的人都開始用「系統」賺錢了。PeggySPA 遠紅外線熱導儀，讓妳找回時間與財富的自由。留言「+1」我傳資料給妳。"
+            start: ["【夢想不是用來想的】✨", "【妳的努力，值得被看見】🌹", "【給自己一個翻轉的機會】🚀", "【致每一位勇敢的創業女性】💎"],
+            mid: ["PeggySPA 遠紅外線熱導儀，是妳轉型路上的最強後盾。", "這不只是一台儀器，更是一套讓妳優雅獲利的系統。", "我們陪妳從零開始，建立專屬自己的美容事業。", "告別勞力賺錢，用科技與專業找回生活品質。"],
+            end: ["今日僅限2名諮詢，私訊我聊聊吧！", "現在就點擊私訊，開啟妳的蛻變之旅。", "我在成功路上的終點，等妳一起加入。", "留言「+1」領取專屬創業企劃書。"]
         },
         '犀利': {
-            fb: "【醒醒吧！勞力賺錢是有天花板的】🚀\n\n很多美容師問我：為什麼我每天忙得要死，收入卻還是那樣？\n\n答案很簡單：因為妳還在用「時間」換「金錢」。\n\nPeggySPA 遠紅外線熱導儀，專利宙元石技術，讓客人體驗一次就上癮。這不是推銷，這是產業轉型的趨勢。如果妳還在觀望，妳的客人遲早會出現在別人的店裡。\n\n要做領頭羊，還是追隨者？全看妳現在的選擇。立即私訊了解代理細節。",
-            ig: "傳統按摩太累？客源留不住？\n妳缺的不是努力，而是「PeggySPA 遠紅外線熱導儀」。\n\n別等市場飽和了才後悔沒早點加入。🔥\n\n#招商 #美容創業 #熱導儀 #一技之長 #轉型必備",
-            threads: "實話很傷人：如果不靠體力妳就沒收入，那妳不是在創業，妳只是在幫自己找一份更高薪的「打工」。PeggySPA 助妳建立自動化獲利系統。"
+            start: ["【還在靠體力賺錢嗎？】🔥", "【實話往往最難聽】🚀", "【妳的生意為什麼留不住人？】💡", "【別讓觀望毀了妳的商機】⚠️"],
+            mid: ["傳統按摩太累、收入卻有天花板，這就是現實。", "PeggySPA 宙元石專利技術，讓客人一次就黏住。", "市場不會等妳準備好，只會等著把妳淘汰。", "聰明人都在用系統滾雪錢，妳還在用雙手拼命？"],
+            end: ["想轉型的美容師，私訊我，不廢話。", "猶豫只會讓妳錯過最好的時機。", "這是一個看數據說話的時代，來聊聊吧。", "機會只留給敢踏出舒適圈的人。"]
         },
         '數據': {
-            fb: "【數據說話：月獲利 8-15 萬的祕密】💰\n\n招商重點：\n✅ 客源增加率：30% 以上\n✅ 耗材成本：極低，淨利空間大\n✅ 專利技術：宙元石遠紅外線，市場唯一性\n\n我們已經幫助超過 50 位美容師達成月收入翻倍。這不是夢想，這是可以被複製的成功模版。PeggySPA 提供保姆級教學，從技術到行銷，我們一手包辦。\n\n想在今年底前達成財務目標？現在就是加入的最佳時機。",
-            ig: "低成本、高獲利、零風險。💰\nPeggySPA 遠紅外線熱導儀：美容界的最強黑馬！\n\n月獲利 10 萬不再是夢想，數據證明一切。🔥\n\n#獲利 #理財創業 #美容儀器 #宙元石 #數據說話",
-            threads: "月獲利 10 萬跟月獲利 3 萬的差別，往往只在一台儀器跟一個選擇。PeggySPA 招商名額倒數中。"
+            start: ["【月收翻倍的精算邏輯】💰", "【低成本、高淨利的商業模版】📊", "【數據揭秘：熱導儀獲利真相】🔍", "【美容店營收暴增的祕密】📈"],
+            mid: ["月獲利 8-15 萬不是夢，關鍵在於專利儀器的回購率。", "耗材成本極低，單次療程淨利高達 70% 以上。", "客源轉介率提升 40%，這就是科技美容的威力。", "完整保姆級教學，縮短妳 90% 的摸索時間。"],
+            end: ["立刻私訊獲取「月入十萬」獲利分析表。", "名額倒數，現在加入最划算。", "報名諮詢，我算給妳看利潤有多大。", "私訊「轉型」，預約一對一事業分析。"]
         },
         '故事': {
-            fb: "【從零到一，我看見她們的蛻變】🌹\n\n曾經有一位媽媽學員跟我說，她害怕自己跟社會脫節太久學不會。但在 PeggySPA 的系統輔助下，現在她已經是兩間工作室的老闆了。\n\n美，不只是外表，更是心靈的豐盈。熱導儀傳遞的不只是溫熱，更是我們對每位客戶的關懷。\n\n在這裡，我們不只是生意夥伴，更是共同成長的家人。期待妳的加入，一起把這份溫暖傳出去。",
-            ig: "每一份美麗背後，都有一個勇敢的故事。🌹\nPeggySPA 與妳一起書寫，屬於妳的創業篇章。\n\n溫暖、傳承、美學。✨\n\n#品牌故事 #溫暖力量 #美容創業 #熱導儀 #傳承",
-            threads: "最好的投資是投資自己。PeggySPA 不只給妳儀器，更給妳一個翻轉人生的機會。妳準備好迎接更好的自己了嗎？"
+            start: ["【那晚，她對我說了心聲...】🕯️", "【從全職媽媽到事業女性】🌸", "【這台儀器傳遞的是溫暖】🤝", "【看見她們眼中的光，我懂了】✨"],
+            mid: ["她曾害怕自己跟社會脫節，但在 PeggySPA 找回了自信。", "熱導儀不只暖了客人的身，也暖了創業者疲憊的心。", "我們是一群熱愛分享美的家人，不只是生意夥伴。", "每一位加入的夥伴，都是 Peggy 最珍視的傳承者。"],
+            end: ["加入我們，不只創業，更是遇見更好的自己。", "期待在 PeggySPA 的大家庭見到妳。", "私訊我，聽聽更多夥伴翻轉人生的故事。", "美學創業，從這份溫暖的連結開始。"]
         }
     };
 
-    function selectStyle(btn, type) {
+    function generate(type) {
         // 切換按鈕狀態
-        document.querySelectorAll('.style-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-
-        // 產出文案
-        const data = database[type];
-        const fbEl = document.getElementById('fb');
-        const igEl = document.getElementById('ig');
-        const thEl = document.getElementById('threads');
-
-        // 增加一點載入感動畫
-        [fbEl, igEl, thEl].forEach(el => {
-            el.style.opacity = 0;
-            setTimeout(() => {
-                el.style.opacity = 1;
-            }, 300);
+        document.querySelectorAll('.style-btn').forEach(b => {
+            b.classList.remove('active');
+            if(b.innerText.includes(type)) b.classList.add('active');
         });
 
+        const fb = document.getElementById('fb');
+        const ig = document.getElementById('ig');
+        const th = document.getElementById('threads');
+
+        // 視覺特效
+        [fb, ig, th].forEach(el => el.classList.add('generating'));
+
         setTimeout(() => {
-            fbEl.innerText = data.fb;
-            igEl.innerText = data.ig;
-            thEl.innerText = data.threads;
+            const getRand = (arr) => arr[Math.floor(Math.random() * arr.length)];
+            const s = pool[type];
+
+            // FB: 深度組裝
+            fb.innerText = `${getRand(s.start)}\n\n${getRand(s.mid)}\n\n${getRand(s.mid)}\n\n${getRand(s.end)}`;
             
-            // 移除斜體提示色
-            [fbEl, igEl, thEl].forEach(el => {
+            // IG: 隨機標籤組裝
+            ig.innerText = `${getRand(s.start)}\n${getRand(s.mid)}\n\n#PeggySPA #美容創業 #熱導儀 #宙元石 #女性創業`;
+            
+            // Threads: 隨機短句組裝
+            th.innerText = `${getRand(s.start)} ${getRand(s.mid)} 想了解的朋友留言「+1」。`;
+
+            [fb, ig, th].forEach(el => {
+                el.classList.remove('generating');
                 el.classList.remove('text-gray-400', 'italic');
-                el.classList.add('text-gray-600');
             });
-        }, 300);
+        }, 400);
     }
 
     function copyText(id) {
         const text = document.getElementById(id).innerText;
         navigator.clipboard.writeText(text).then(() => {
-            alert('文案已複製成功！快去貼文吧！');
+            const btn = event.target;
+            const original = btn.innerText;
+            btn.innerText = 'OK!';
+            setTimeout(() => btn.innerText = original, 1500);
         });
     }
 </script>
-
 </body>
 </html>
