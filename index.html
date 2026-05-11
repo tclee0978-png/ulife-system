@@ -38,11 +38,23 @@
                 <h3 class="text-xl font-black mb-6 flex items-center gap-2 text-gray-700">
                     <i class="fa-solid fa-rocket text-orange-500"></i> 風格選單
                 </h3>
-                <div class="grid grid-cols-1 gap-4">
+                <div class="grid grid-cols-1 gap-4 mb-10">
                     <button class="style-btn p-5 rounded-2xl text-base font-black active" onclick="generate('未來趨勢')">AI 智慧與未來趨勢</button>
                     <button class="style-btn p-5 rounded-2xl text-base font-black" onclick="generate('科技修復')">遠紅外線與科技修復</button>
                     <button class="style-btn p-5 rounded-2xl text-base font-black" onclick="generate('商機獲利')">負離子商機獲利</button>
                     <button class="style-btn p-5 rounded-2xl text-base font-black" onclick="generate('健康生活')">U-Life 健康生活藍圖</button>
+                </div>
+
+                <h3 class="text-sm font-black mb-4 flex items-center gap-2 text-gray-400 uppercase tracking-widest">
+                    <i class="fa-solid fa-microchip"></i> AI 快捷工具
+                </h3>
+                <div class="grid grid-cols-2 gap-3">
+                    <a href="https://gemini.google.com/" target="_blank" class="flex items-center justify-center gap-2 bg-[#4285F4] text-white py-3 rounded-xl text-xs font-bold hover:brightness-110 transition shadow-md">
+                        <i class="fa-solid fa-g"></i> Gemini
+                    </a>
+                    <a href="https://chatgpt.com/" target="_blank" class="flex items-center justify-center gap-2 bg-[#10a37f] text-white py-3 rounded-xl text-xs font-bold hover:brightness-110 transition shadow-md">
+                        <i class="fa-solid fa-bolt"></i> ChatGPT
+                    </a>
                 </div>
             </div>
         </div>
@@ -67,60 +79,4 @@
 <script>
     const dataPool = {
         '未來趨勢': {
-            start: ["【當 AI 遇上大健康，妳看見商機了嗎？】🤖", "【總監觀點：科技健康生活新標準】🚀", "【未來的獲利模式：AI 智慧與精準健康】💎"],
-            mid: ["U-Life 領先業界將 AI 邏輯導入健康管理，配合高效能熱導設備，實現精準調理。", "這不只是一場技術革命，更是對傳統健康生活方式的全面升級。"],
-            end: ["立刻私訊，獲取 U-Life AI 健康創業報告。", "留言「AI」領取總監親筆撰寫的轉型計畫。"]
-        },
-        '科技修復': {
-            start: ["【負離子＋遠紅外線：雙效修復的奇蹟】✨", "【熱導設備：讓每一顆細胞重新呼吸】🔥", "【為什麼 U-Life 的熱導技術是市場唯一？】🔍"],
-            mid: ["利用遠紅外線深層共振，配合負離子中和環境壓力，達到極致的健康平衡。", "U-Life 專利宙元石技術，將負離子含量提升至森林等級。"],
-            end: ["私訊「健康」，了解 U-Life 核心設備代理權。", "讓科技成為妳照顧全家健康的最好後盾。"]
-        },
-        '商機獲利': {
-            start: ["【健康財富：負離子產業的百億藍海】💰", "【熱導設備代理：美容與健康店家的救星】📈", "【為什麼總監選在今年全面推廣 U-Life？】📊"],
-            mid: ["當負離子科技遇上高效熱導設備，創造的是客人的回購率與店家的淨利潤。", "低門檻切入大健康市場，用 U-Life 的系統實現財務自由。"],
-            end: ["私訊「獲利」，我教妳如何用健康系統滾雪球。", "名額倒數，現在加入享總監資源。"]
-        },
-        '健康生活': {
-            start: ["【U-Life：定義妳的理想健康生活】🌸", "【從負離子空氣到遠紅外線熱感修復】✨", "【這是一份關於愛、科技與傳承的事業】🤝"],
-            mid: ["我們致力於將 AI 智慧融入日常，讓生活充滿負離子的純淨與溫暖。", "U-Life 不只是招商，更是邀請妳成為健康生活的推廣者。"],
-            end: ["私訊了解 U-Life 全方位解決方案。", "留言「+1」，我傳改變人生的藍圖給妳。"]
-        }
-    };
-
-    function generate(type) {
-        document.querySelectorAll('.style-btn').forEach(b => {
-            b.classList.remove('active');
-            if(b.innerText.includes(type)) b.classList.add('active');
-        });
-
-        const fb = document.getElementById('fb');
-        const ig = document.getElementById('ig');
-        const th = document.getElementById('threads');
-
-        [fb, ig, th].forEach(el => el.classList.add('generating'));
-
-        setTimeout(() => {
-            const getRand = (arr) => arr[Math.floor(Math.random() * arr.length)];
-            const s = dataPool[type];
-
-            fb.innerText = `${getRand(s.start)}\n\n${getRand(s.mid)}\n\n${getRand(s.end)}`;
-            ig.innerText = `${getRand(s.start)}\n${getRand(s.mid)}\n\n#ULife #遠紅外線 #負離子 #AI科技 #健康生活`;
-            th.innerText = `${getRand(s.start)} ${getRand(s.mid)} 認同的請分享。`;
-
-            [fb, ig, th].forEach(el => el.classList.remove('generating'));
-        }, 300);
-    }
-
-    function copyText(id) {
-        const text = document.getElementById(id).innerText;
-        navigator.clipboard.writeText(text).then(() => {
-            const btn = event.target;
-            const original = btn.innerText;
-            btn.innerText = 'OK!';
-            setTimeout(() => btn.innerText = original, 1500);
-        });
-    }
-</script>
-</body>
-</html>
+            start: ["【當 AI 遇上大健康，妳看見商機了嗎？】🤖", "【總監觀點：科技
