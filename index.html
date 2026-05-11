@@ -46,26 +46,41 @@
                 </div>
 
                 <div class="mt-10 p-6 bg-slate-900 rounded-3xl text-white shadow-inner">
-                    <p class="text-orange-400 text-xs font-black mb-3 italic">SYSTEM STATUS: READY</p>
-                    <p class="text-gray-300 text-[11px] leading-relaxed">
-                        本系統已整合「遠紅外線、負離子、AI」三大核心數據邏輯。每次生成皆會自動配對最適合的熱導設備推廣策略。
-                    </p>
+                    <p class="text-orange-400 text-xs font-black mb-4 italic">AI QUICK ACCESS</p>
+                    <div class="grid grid-cols-2 gap-3">
+                        <a href="https://gemini.google.com/" target="_blank" class="flex items-center justify-center gap-2 bg-[#4285F4] py-3 rounded-xl text-xs font-bold hover:brightness-110 transition">
+                            <i class="fa-solid fa-g"></i> Gemini
+                        </a>
+                        <a href="https://chatgpt.com/" target="_blank" class="flex items-center justify-center gap-2 bg-[#10a37f] py-3 rounded-xl text-xs font-bold hover:brightness-110 transition">
+                            <i class="fa-solid fa-bolt"></i> GPT
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="lg:col-span-8 grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="glass-card rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col border-t-8 border-blue-600">
-                <div class="p-5 bg-blue-50 flex justify-between items-center"><span class="font-black text-blue-800 text-sm">FB 權威觀點</span><button onclick="copyText('fb')" class="bg-white text-blue-700 px-3 py-1 rounded-full text-[10px] font-black shadow-sm">COPY</button></div>
-                <div id="fb" contenteditable="true" class="result-box p-6 text-sm leading-relaxed text-gray-600 overflow-y-auto scrollbar-hide font-medium italic">點擊左側開始 AI 生成...</div>
+        <div class="lg:col-span-8 space-y-6">
+            <div id="aiPromptBox" class="glass-card p-6 rounded-[2rem] shadow-xl border-2 border-dashed border-orange-200 hidden mb-6">
+                <div class="flex justify-between items-center mb-3">
+                    <span class="text-orange-600 font-black text-sm">✨ 複製後貼給上方 AI 按鈕：</span>
+                    <button onclick="copyText('finalPrompt')" class="bg-orange-500 text-white px-4 py-1 rounded-full text-xs font-bold">一鍵複製指令</button>
+                </div>
+                <textarea id="finalPrompt" readonly class="w-full h-24 bg-gray-50 p-4 rounded-xl text-xs text-gray-500 outline-none border-none resize-none"></textarea>
             </div>
-            <div class="glass-card rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col border-t-8 border-orange-500">
-                <div class="p-5 bg-orange-50 flex justify-between items-center"><span class="font-black text-orange-700 text-sm">IG 視覺行銷</span><button onclick="copyText('ig')" class="bg-white text-orange-700 px-3 py-1 rounded-full text-[10px] font-black shadow-sm">COPY</button></div>
-                <div id="ig" contenteditable="true" class="result-box p-6 text-sm leading-relaxed text-gray-600 overflow-y-auto scrollbar-hide font-medium italic">等待生成...</div>
-            </div>
-            <div class="glass-card rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col border-t-8 border-slate-800">
-                <div class="p-5 bg-gray-100 flex justify-between items-center"><span class="font-black text-black text-sm">Threads 趨勢說</span><button onclick="copyText('threads')" class="bg-white text-black px-3 py-1 rounded-full text-[10px] font-black shadow-sm">COPY</button></div>
-                <div id="threads" contenteditable="true" class="result-box p-6 text-sm leading-relaxed text-gray-600 overflow-y-auto scrollbar-hide font-medium italic">等待生成...</div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="glass-card rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col border-t-8 border-blue-600">
+                    <div class="p-5 bg-blue-50 flex justify-between items-center"><span class="font-black text-blue-800 text-sm">FB 權威觀點</span><button onclick="copyText('fb')" class="bg-white text-blue-700 px-3 py-1 rounded-full text-[10px] font-black shadow-sm">COPY</button></div>
+                    <div id="fb" contenteditable="true" class="result-box p-6 text-sm leading-relaxed text-gray-600 overflow-y-auto scrollbar-hide font-medium italic">點擊左側開始 AI 生成...</div>
+                </div>
+                <div class="glass-card rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col border-t-8 border-orange-500">
+                    <div class="p-5 bg-orange-50 flex justify-between items-center"><span class="font-black text-orange-700 text-sm">IG 視覺行銷</span><button onclick="copyText('ig')" class="bg-white text-orange-700 px-3 py-1 rounded-full text-[10px] font-black shadow-sm">COPY</button></div>
+                    <div id="ig" contenteditable="true" class="result-box p-6 text-sm leading-relaxed text-gray-600 overflow-y-auto scrollbar-hide font-medium italic">等待生成...</div>
+                </div>
+                <div class="glass-card rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col border-t-8 border-slate-800">
+                    <div class="p-5 bg-gray-100 flex justify-between items-center"><span class="font-black text-black text-sm">Threads 趨勢說</span><button onclick="copyText('threads')" class="bg-white text-black px-3 py-1 rounded-full text-[10px] font-black shadow-sm">COPY</button></div>
+                    <div id="threads" contenteditable="true" class="result-box p-6 text-sm leading-relaxed text-gray-600 overflow-y-auto scrollbar-hide font-medium italic">等待生成...</div>
+                </div>
             </div>
         </div>
     </div>
@@ -81,7 +96,7 @@
         '科技修復': {
             start: ["【負離子＋遠紅外線：雙效修復的奇蹟】✨", "【熱導設備：讓每一顆細胞重新呼吸】🔥", "【為什麼 U-Life 的熱導技術是市場唯一？】🔍"],
             mid: ["利用遠紅外線深層共振，配合負離子中和環境壓力，達到極致的健康平衡。", "專業熱導設備不只是工具，它是將大自然能量導入家中的智慧媒介。", "U-Life 專利宙元石技術，將負離子含量提升至森林等級，讓修復無處不在。"],
-            end: ["想體驗科技修復的力量？私訊領取體驗名額。", "私訊「健康」，了解 U-Life 核心設備代理權。", "讓科技成為妳照顧全家健康的最好後盾。"]
+            end: ["想體驗科技修復的力量？私訊領取體驗名應。", "私訊「健康」，了解 U-Life 核心設備代理權。", "讓科技成為妳照顧全家健康的最好後盾。"]
         },
         '商機獲利': {
             start: ["【健康財富：負離子產業的百億藍海】💰", "【熱導設備代理：美容與健康店家的救星】📈", "【為什麼總監選在今年全面推廣 U-Life？】📊"],
@@ -104,6 +119,8 @@
         const fb = document.getElementById('fb');
         const ig = document.getElementById('ig');
         const th = document.getElementById('threads');
+        const promptBox = document.getElementById('aiPromptBox');
+        const promptText = document.getElementById('finalPrompt');
 
         [fb, ig, th].forEach(el => el.classList.add('generating'));
 
@@ -111,9 +128,14 @@
             const getRand = (arr) => arr[Math.floor(Math.random() * arr.length)];
             const s = dataPool[type];
 
+            // 生成預覽內容
             fb.innerText = `${getRand(s.start)}\n\n${getRand(s.mid)}\n\n${getRand(s.mid)}\n\n${getRand(s.end)}`;
             ig.innerText = `${getRand(s.start)}\n${getRand(s.mid)}\n\n#ULife #遠紅外線 #負離子 #AI科技 #健康生活 #熱導設備 #創業總監`;
-            th.innerText = `${getRand(s.start)} ${getRand(s.mid)} 認同的請分享給需要的朋友。`;
+            th.innerText = `${getRand(s.start)} ${getRand(s.mid)} 認同的請分享。`;
+
+            // 生成隱藏指令給 AI 模型用
+            promptBox.classList.remove('hidden');
+            promptText.value = `你現在是 U-Life 招商總監。請針對「遠紅外線、負離子、AI 健康、熱導設備」這五個元素，產出更具擴散力的 ${type} 風格貼文。請維持專業、溫暖、且具備健康科技感的台灣口吻。`;
 
             [fb, ig, th].forEach(el => {
                 el.classList.remove('generating');
@@ -124,16 +146,9 @@
     }
 
     function copyText(id) {
-        const text = document.getElementById(id).innerText;
+        const text = document.getElementById(id).value || document.getElementById(id).innerText;
         navigator.clipboard.writeText(text).then(() => {
-            const btn = event.target;
-            const original = btn.innerText;
-            btn.innerText = 'OK!';
-            btn.classList.add('bg-orange-500', 'text-white');
-            setTimeout(() => {
-                btn.innerText = original;
-                btn.classList.remove('bg-orange-500', 'text-white');
-            }, 1500);
+            alert('已複製成功！您可以點擊 Gemini 或 GPT 按鈕貼上使用了。');
         });
     }
 </script>
