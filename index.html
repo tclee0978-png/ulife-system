@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>U-Life｜遠紅外線健康生活生成器</title>
+    <title>U-Life｜五大核心科技生成器</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Noto Sans TC', sans-serif; background: #fdfaf7; scroll-behavior: smooth; }
-        .glass-card { background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(10px); border: 1px solid rgba(255, 126, 33, 0.1); }
-        .style-btn { transition: all 0.3s; border: 2px solid #f1f5f9; background: white; }
-        .style-btn.active { background: #ff7e21; color: white; border-color: #ff7e21; box-shadow: 0 4px 15px rgba(255, 126, 33, 0.4); transform: translateY(-2px); }
-        .result-box { min-height: 280px; transition: all 0.3s ease; }
+        body { font-family: 'Noto Sans TC', sans-serif; background: #f4f7f6; scroll-behavior: smooth; }
+        .glass-card { background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(12px); border: 1px solid rgba(255, 126, 33, 0.1); }
+        .style-btn { transition: all 0.3s; border: 2px solid #e2e8f0; background: white; }
+        .style-btn.active { background: #ff7e21; color: white; border-color: #ff7e21; box-shadow: 0 4px 20px rgba(255, 126, 33, 0.4); transform: translateY(-2px); }
+        .result-box { min-height: 320px; transition: all 0.4s ease; }
+        .tag-pill { background: #fff7ed; color: #ea580c; border: 1px solid #ffedd5; padding: 2px 10px; border-radius: 99px; font-size: 11px; font-weight: bold; }
         .scrollbar-hide::-webkit-scrollbar { display: none; }
         @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
         .generating { animation: pulse 0.3s infinite; }
@@ -22,73 +23,75 @@
 
 <div class="max-w-7xl mx-auto">
     <header class="text-center mb-12">
-        <div class="inline-block bg-orange-500 text-white px-4 py-1 rounded-full text-xs font-bold tracking-widest mb-4">U-LIFE HEALTH SYSTEM</div>
-        <h1 class="text-4xl md:text-5xl font-black text-[#2d3748] mb-2 tracking-tighter">
-            <span class="text-orange-500">U-Life</span> 遠紅外線健康生活推廣總監
+        <div class="flex justify-center gap-2 mb-4">
+            <span class="tag-pill">遠紅外線</span><span class="tag-pill">負離子</span><span class="tag-pill">AI 科技</span><span class="tag-pill">健康生活</span><span class="tag-pill">熱導設備</span>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-black text-[#1a202c] mb-2 tracking-tighter">
+            <span class="text-orange-500">U-Life</span> 健康生活推廣總監
         </h1>
-        <p class="text-gray-400 font-medium text-sm tracking-[0.3em] uppercase">專業招商文案 AI 無限生成系統</p>
+        <p class="text-gray-400 font-bold text-xs tracking-[0.4em] uppercase">智慧科技與大健康產業的完美結合</p>
     </header>
 
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
         <div class="lg:col-span-4 space-y-6">
             <div class="glass-card p-8 rounded-[2.5rem] shadow-2xl border-2 border-white">
                 <h3 class="text-xl font-black mb-6 flex items-center gap-2 text-gray-700">
-                    <i class="fa-solid fa-rocket text-orange-500"></i> 風格選單・隨點隨產
+                    <i class="fa-solid fa-brain text-orange-500"></i> AI 風格決策
                 </h3>
-                <div class="grid grid-cols-1 gap-4" id="styleGroup">
-                    <button class="style-btn p-5 rounded-2xl text-base font-black active" onclick="generate('總監觀點')">總監犀利觀點</button>
-                    <button class="style-btn p-5 rounded-2xl text-base font-black" onclick="generate('健康財富')">健康財富商機</button>
-                    <button class="style-btn p-5 rounded-2xl text-base font-black" onclick="generate('創業激勵')">熱情創業激勵</button>
-                    <button class="style-btn p-5 rounded-2xl text-base font-black" onclick="generate('團隊故事')">團隊成功故事</button>
+                <div class="grid grid-cols-1 gap-4">
+                    <button class="style-btn p-5 rounded-2xl text-base font-black active" onclick="generate('未來趨勢')">AI 智慧與未來趨勢</button>
+                    <button class="style-btn p-5 rounded-2xl text-base font-black" onclick="generate('科技修復')">遠紅外線與科技修復</button>
+                    <button class="style-btn p-5 rounded-2xl text-base font-black" onclick="generate('商機獲利')">負離子商機獲利</button>
+                    <button class="style-btn p-5 rounded-2xl text-base font-black" onclick="generate('生活藍圖')">U-Life 健康生活藍圖</button>
                 </div>
 
-                <div class="mt-10 p-6 bg-orange-50 rounded-3xl border border-orange-100">
-                    <p class="text-orange-800 text-sm font-black mb-2">💡 總監小叮嚀：</p>
-                    <p class="text-orange-600/80 text-xs leading-relaxed font-medium">
-                        好的文案要具備「痛點」與「願景」。同一個按鈕可以多次點擊，每次產出的邏輯皆不相同，讓您的版面充滿多樣性！
+                <div class="mt-10 p-6 bg-slate-900 rounded-3xl text-white shadow-inner">
+                    <p class="text-orange-400 text-xs font-black mb-3 italic">SYSTEM STATUS: READY</p>
+                    <p class="text-gray-300 text-[11px] leading-relaxed">
+                        本系統已整合「遠紅外線、負離子、AI」三大核心數據邏輯。每次生成皆會自動配對最適合的熱導設備推廣策略。
                     </p>
                 </div>
             </div>
         </div>
 
         <div class="lg:col-span-8 grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="glass-card rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col border-t-8 border-blue-700">
-                <div class="p-5 bg-blue-50 flex justify-between items-center"><span class="font-black text-blue-800 text-sm italic">FB 深度專業版</span><button onclick="copyText('fb')" class="bg-white text-blue-700 px-3 py-1 rounded-full text-[10px] font-black shadow-sm border border-blue-100">複製</button></div>
-                <div id="fb" contenteditable="true" class="result-box p-6 text-sm leading-relaxed text-gray-600 overflow-y-auto scrollbar-hide">點擊按鈕，開始生成總監級文案...</div>
+            <div class="glass-card rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col border-t-8 border-blue-600">
+                <div class="p-5 bg-blue-50 flex justify-between items-center"><span class="font-black text-blue-800 text-sm">FB 權威觀點</span><button onclick="copyText('fb')" class="bg-white text-blue-700 px-3 py-1 rounded-full text-[10px] font-black shadow-sm">COPY</button></div>
+                <div id="fb" contenteditable="true" class="result-box p-6 text-sm leading-relaxed text-gray-600 overflow-y-auto scrollbar-hide font-medium italic">點擊左側開始 AI 生成...</div>
             </div>
             <div class="glass-card rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col border-t-8 border-orange-500">
-                <div class="p-5 bg-orange-50 flex justify-between items-center"><span class="font-black text-orange-700 text-sm italic">IG 質感視覺版</span><button onclick="copyText('ig')" class="bg-white text-orange-700 px-3 py-1 rounded-full text-[10px] font-black shadow-sm border border-orange-100">複製</button></div>
-                <div id="ig" contenteditable="true" class="result-box p-6 text-sm leading-relaxed text-gray-600 overflow-y-auto scrollbar-hide">點擊按鈕生成...</div>
+                <div class="p-5 bg-orange-50 flex justify-between items-center"><span class="font-black text-orange-700 text-sm">IG 視覺行銷</span><button onclick="copyText('ig')" class="bg-white text-orange-700 px-3 py-1 rounded-full text-[10px] font-black shadow-sm">COPY</button></div>
+                <div id="ig" contenteditable="true" class="result-box p-6 text-sm leading-relaxed text-gray-600 overflow-y-auto scrollbar-hide font-medium italic">等待生成...</div>
             </div>
-            <div class="glass-card rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col border-t-8 border-gray-900">
-                <div class="p-5 bg-gray-100 flex justify-between items-center"><span class="font-black text-black text-sm italic">Threads 觀點版</span><button onclick="copyText('threads')" class="bg-white text-black px-3 py-1 rounded-full text-[10px] font-black shadow-sm border border-gray-200">複製</button></div>
-                <div id="threads" contenteditable="true" class="result-box p-6 text-sm leading-relaxed text-gray-600 overflow-y-auto scrollbar-hide">點擊按鈕生成...</div>
+            <div class="glass-card rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col border-t-8 border-slate-800">
+                <div class="p-5 bg-gray-100 flex justify-between items-center"><span class="font-black text-black text-sm">Threads 趨勢說</span><button onclick="copyText('threads')" class="bg-white text-black px-3 py-1 rounded-full text-[10px] font-black shadow-sm">COPY</button></div>
+                <div id="threads" contenteditable="true" class="result-box p-6 text-sm leading-relaxed text-gray-600 overflow-y-auto scrollbar-hide font-medium italic">等待生成...</div>
             </div>
         </div>
     </div>
 </div>
 
 <script>
-    const pool = {
-        '總監觀點': {
-            start: ["【2026年，妳還在用身體換錢嗎？】⚖️", "【總監觀點：趨勢比努力更重要】🚀", "【妳的努力，不該只有一種收入】💎", "【別讓現狀，限制了妳對未來的想像】🔥"],
-            mid: ["U-Life 遠紅外線健康系統，不只是儀器，更是一套「被動收入」的經營模組。", "傳統美容師靠體力，U-Life 推廣者靠「科技與系統」建立影響力。", "健康產業是未來的剛需，而我們掌握了最核心的宙元石熱導技術。", "當妳還在觀望，市場已經在重新洗牌。這是一場關於「選擇」的競爭。"],
-            end: ["立刻私訊領取「U-Life 獲利模組分析」。", "想知道總監如何從 0 到 1？私訊「+1」了解詳情。", "機會從不等人，只等敢踏出第一步的人。", "私訊諮詢，我會親自與妳對接創業計畫。"]
+    const dataPool = {
+        '未來趨勢': {
+            start: ["【當 AI 遇上大健康，妳看見商機了嗎？】🤖", "【總監直擊：2026 科技健康生活新標準】🚀", "【未來的獲利模式：AI 智慧與精準健康】💎"],
+            mid: ["U-Life 領先業界將 AI 邏輯導入健康管理，配合高效能熱導設備，實現精準調理。", "我們不僅提供負離子與遠紅外線雙重技術，更用智慧系統協助夥伴分析商機。", "這不只是一場技術革命，更是對傳統健康生活方式的全面升級。"],
+            end: ["立刻私訊，獲取 U-Life AI 健康創業報告。", "留言「AI」領取總監親筆撰寫的轉型計畫。", "加入我們，站在智慧健康產業的最前線。"]
         },
-        '健康財富': {
-            start: ["【健康，是最好的投資，更是最好的商機】💰", "【月獲利翻倍的健康方程式】📊", "【U-Life 總監帶妳看透健康產業藍海】🌊", "【低門檻、高效能、高回購的經營之道】📈"],
-            mid: ["熱導儀單次淨利高達 80%，讓妳的店格瞬間升級。", "不僅能解決客人的僵硬痠痛，更能解決妳的經營痛點。", "宙元石遠紅外線技術，讓客人體驗後就離不開妳。", "從技術培訓到行銷導流，U-Life 提供全方位的保姆級支援。"],
-            end: ["私訊「我要了解」，領取總監親選創業包。", "加入 U-Life，讓健康成為妳最穩定的存摺。", "倒數 3 名創業名額，現在就卡位。", "想在三個月內讓營收翻倍？私訊我聊聊。"]
+        '科技修復': {
+            start: ["【負離子＋遠紅外線：雙效修復的奇蹟】✨", "【熱導設備：讓每一顆細胞重新呼吸】🔥", "【為什麼 U-Life 的熱導技術是市場唯一？】🔍"],
+            mid: ["利用遠紅外線深層共振，配合負離子中和環境壓力，達到極致的健康平衡。", "專業熱導設備不只是工具，它是將大自然能量導入家中的智慧媒介。", "U-Life 專利宙元石技術，將負離子含量提升至森林等級，讓修復無處不在。"],
+            end: ["想體驗科技修復的力量？私訊領取體驗名額。", "私訊「健康」，了解 U-Life 核心設備代理權。", "讓科技成為妳照顧全家健康的最好後盾。"]
         },
-        '創業激勵': {
-            start: ["【致每一位不甘平凡的女性】🌸", "【妳值得更優雅地賺錢，更自信地生活】✨", "【把妳的專業，放大成一份事業】🚀", "【給自己一個重新定義成功的機會】💎"],
-            mid: ["在 U-Life，我們不僅傳遞溫熱，更傳遞一份改變人生的勇氣。", "不管妳是美容師、全職媽媽或轉職者，這裡都有妳的位置。", "不用拼命，也能擁有高質感的生活。這就是科技美容的魔力。", "我們不只是合作夥伴，更是共同成長的健康推廣戰友。"],
-            end: ["我在成功路上的頂端，等妳一起加入。", "私訊「我想變強」，開啟妳的創業篇章。", "期待在 U-Life 的大家庭見到蛻變後的妳。", "留言「+1」領取總監創業心法。"]
+        '商機獲利': {
+            start: ["【健康財富：負離子產業的百億藍海】💰", "【熱導設備代理：美容與健康店家的救星】📈", "【為什麼總監選在今年全面推廣 U-Life？】📊"],
+            mid: ["當負離子科技遇上高效熱導設備，創造的是客人的回購率與店家的淨利潤。", "結合遠紅外線熱效應，讓妳的服務項目具備 AI 級別的競爭力與獨特性。", "低門檻切入大健康市場，用 U-Life 的系統實現財務與時間的自由。"],
+            end: ["名額倒數，現在加入享總監親自帶隊資源。", "私訊「獲利」，我教妳如何用健康系統滾雪球。", "立刻諮詢，預約妳的 U-Life 事業版圖。"]
         },
-        '團隊故事': {
-            start: ["【看見她們的蛻變，是我最大的動力】❤️", "【從 0 經驗到月入十萬的真實紀錄】📝", "【這是一場關於溫暖與傳承的旅程】🤝", "【在 U-Life，我們是一家人】🏠"],
-            mid: ["看著團隊夥伴從不敢開口，到現在能自信帶領團隊。", "每一台熱導儀背後，都挽救了一段疲憊的健康與心靈。", "我們不賣儀器，我們分享的是一種「生活方式」。", "感謝 U-Life，讓更多女性找回了在社會中的價值與光芒。"],
-            end: ["加入我們，一起書寫妳的傳奇故事。", "私訊聽聽更多學員的轉型見證。", "想要一個有溫度的事業？U-Life 歡迎妳。", "留言「想聽故事」，我傳夥伴的見證給妳。"]
+        '生活藍圖': {
+            start: ["【U-Life：定義妳的理想健康生活】🌸", "【從負離子空氣到遠紅外線熱感修復】✨", "【這是一份關於愛、科技與傳承的事業】🤝"],
+            mid: ["我們致力於將 AI 智慧融入日常，讓每一天的生活都充滿負離子的純淨與溫暖。", "U-Life 不只是招商，更是邀請妳成為健康生活的推廣總監，改變更多家庭。", "透過熱導設備，將這份遠紅外線的溫熱傳遞給每一個需要的靈魂。"],
+            end: ["期待在 U-Life 的成功聚會中見到妳。", "私訊了解 U-Life 全方位健康生活解決方案。", "留言「+1」，我傳一份改變人生的藍圖給妳。"]
         }
     };
 
@@ -106,17 +109,18 @@
 
         setTimeout(() => {
             const getRand = (arr) => arr[Math.floor(Math.random() * arr.length)];
-            const s = pool[type];
+            const s = dataPool[type];
 
             fb.innerText = `${getRand(s.start)}\n\n${getRand(s.mid)}\n\n${getRand(s.mid)}\n\n${getRand(s.end)}`;
-            ig.innerText = `${getRand(s.start)}\n${getRand(s.mid)}\n\n#ULife #遠紅外線 #健康生活 #總監推薦 #創業商機 #轉型首選`;
-            th.innerText = `${getRand(s.start)} ${getRand(s.mid)} 同意的朋友留言「+1」。`;
+            ig.innerText = `${getRand(s.start)}\n${getRand(s.mid)}\n\n#ULife #遠紅外線 #負離子 #AI科技 #健康生活 #熱導設備 #創業總監`;
+            th.innerText = `${getRand(s.start)} ${getRand(s.mid)} 認同的請分享給需要的朋友。`;
 
             [fb, ig, th].forEach(el => {
                 el.classList.remove('generating');
-                el.style.color = '#4a5568';
+                el.style.color = '#334155';
+                el.style.fontStyle = 'normal';
             });
-        }, 400);
+        }, 500);
     }
 
     function copyText(id) {
@@ -124,7 +128,7 @@
         navigator.clipboard.writeText(text).then(() => {
             const btn = event.target;
             const original = btn.innerText;
-            btn.innerText = 'COPIED!';
+            btn.innerText = 'OK!';
             btn.classList.add('bg-orange-500', 'text-white');
             setTimeout(() => {
                 btn.innerText = original;
