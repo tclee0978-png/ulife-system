@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小彤遠紅外線熱導儀｜專業招商貼文生成器</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Noto Sans TC', sans-serif; background: #fdf2f2; }
+        .glass-card { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border: 1px solid rgba(230, 0, 18, 0.1); }
+        .copy-btn { transition: all 0.2s; }
+        .copy-btn:active { transform: scale(0.9); }
+        .style-btn { transition: all 0.3s; }
+        .style-btn.active { background: #e60012; color: white; border-color: #e60012; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(230, 0, 18, 0.3); }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-thumb { background: #e60012; border-radius: 10px; }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+<div class="max-w-7xl mx-auto">
+    <header class="text-center mb-10">
+        <h1 class="text-4xl font-black text-[#e60012] mb-2 tracking-tighter">🔥 小彤遠紅外線熱導儀 招商生成器</h1>
+        <p class="text-gray-500 font-medium">專業導流貼文・一鍵生成・無限制產出</p>
+    </header>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        <div class="lg:col-span-4 space-y-6">
+            <div class="glass-card p-6 rounded-3xl shadow-xl">
+                <h3 class="text-lg font-bold mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-wand-magic-sparkles text-red-500"></i> 1. 選擇今日文案風格
+                </h3>
+                <div class="grid grid-cols-2 gap-3" id="styleGroup">
+                    <button class="style-btn border-2 border-gray-100 p-3 rounded-2xl text-sm font-bold" onclick="selectStyle(this, '溫暖激勵')">溫暖激勵</button>
+                    <button class="style-btn border-2 border-gray-100 p-3 rounded-2xl text-sm font-bold active" onclick="selectStyle(this, '犀利直球')">犀利直球</button>
+                    <button class="style-btn border-2 border-gray-100 p-3 rounded-2xl text-sm font-bold" onclick="selectStyle(this, '數據獲利')">數據獲利</button>
+                    <button class="style-btn border-2 border-gray-100 p-3 rounded-2xl text-sm font-bold" onclick="selectStyle(this, '故事感性')">故事感性</button>
+                    <button class="style-btn border-2 border-gray-100 p-3 rounded-2xl text-sm font-bold" onclick="selectStyle(this, '限量急迫')">限量急迫</button>
+                    <button class="style-btn border-2 border-gray-100 p-3 rounded-2xl text-sm font-bold" onclick="selectStyle(this, '專家權威')">專家權威</button>
+                </div>
+
+                <h3 class="text-lg font-bold mt-8 mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-pen-to-square text-red-500"></i> 2. 今日招商靈感 (選填)
+                </h3>
+                <textarea id="keywords" rows="5" class="w-full p-4 border-2 border-gray-100 rounded-2xl focus:border-red-500 outline-none text-sm transition" placeholder="例如：月獲利10萬、宙元石專利、美容師轉型、僅剩3名..."></textarea>
+                
+                <button onclick="generatePrompt()" class="w-full mt-6 bg-[#e60012] text-white py-4 rounded-2xl font-black text-lg shadow-lg hover:bg-red-700 transition-all flex items-center justify-center gap-3">
+                    <i class="fa-solid fa-bolt"></i> 生成大師級 Prompt
+                </button>
+            </div>
+        </div>
+
+        <div class="lg:col-span-8 space-y-6">
+            
+            <div id="promptOutput" class="glass-card p-6 rounded-3xl shadow-xl border-2 border-dashed border-red-200 hidden">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="font-black text-red-600 italic">✨ 已為您準備好 AI 咒語：</h3>
+                    <button onclick="copyContent('finalPrompt')" class="copy-btn text-xs bg-red-50 text-red-600 px-3 py-1 rounded-full font-bold hover:bg-red-600 hover:text-white">
+                        <i class="fa-regular fa-copy"></i> 點我複製，貼給 Gemini
+                    </button>
+                </div>
+                <textarea id="finalPrompt" readonly class="w-full h-40 bg-gray-50 p-4 rounded-2xl text-sm text-gray-600 outline-none border-none"></textarea>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                
+                <div class="glass-card rounded-3xl shadow-lg overflow-hidden border-t-4 border-blue-600">
+                    <div class="p-4 bg-blue-50 flex justify-between items-center">
+                        <span class="font-black text-blue-700"><i class="fa-brands fa-facebook"></i> FB 欄位</span>
+                        <button onclick="copyContent('fbResult')" class="copy-btn text-[10px] bg-white border border-blue-200 px-2 py-1 rounded-md font-bold">複製</button>
+                    </div>
+                    <div id="fbResult" contenteditable="true" class="p-4 h-64 overflow-y-auto text-sm leading-relaxed text-gray-400 italic">
+                        貼上生成後的文案到此處管理...
+                    </div>
+                </div>
+
+                <div class="glass-card rounded-3xl shadow-lg overflow-hidden border-t-4 border-pink-500">
+                    <div class="p-4 bg-pink-50 flex justify-between items-center">
+                        <span class="font-black text-pink-700"><i class="fa-brands fa-instagram"></i> IG 欄位</span>
+                        <button onclick="copyContent('igResult')" class="copy-btn text-[10px] bg-white border border-pink-200 px-2 py-1 rounded-md font-bold">複製</button>
+                    </div>
+                    <div id="igResult" contenteditable="true" class="p-4 h-64 overflow-y-auto text-sm leading-relaxed text-gray-400 italic">
+                        貼上生成後的文案到此處管理...
+                    </div>
+                </div>
+
+                <div class="glass-card rounded-3xl shadow-lg overflow-hidden border-t-4 border-black">
+                    <div class="p-4 bg-gray-50 flex justify-between items-center">
+                        <span class="font-black text-black"><i class="fa-brands fa-threads"></i> Threads</span>
+                        <button onclick="copyContent('threadsResult')" class="copy-btn text-[10px] bg-white border border-gray-200 px-2 py-1 rounded-md font-bold">複製</button>
+                    </div>
+                    <div id="threadsResult" contenteditable="true" class="p-4 h-64 overflow-y-auto text-sm leading-relaxed text-gray-400 italic">
+                        貼上生成後的文案到此處管理...
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="p-4 text-center text-gray-400 text-xs tracking-widest">
+                <p>💡 操作指引：選擇風格 > 輸入關鍵字 > 複製 Prompt > 貼給 AI > 將產出的文案貼回右側欄位記錄</p>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    let currentStyle = '犀利直球';
+
+    function selectStyle(btn, style) {
+        document.querySelectorAll('.style-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentStyle = style;
+    }
+
+    function generatePrompt() {
+        const keywords = document.getElementById('keywords').value || "一般招商、儀器優勢、獲利機會";
+        const date = new Date().toLocaleDateString();
+
+        const promptTemplate = `你現在是「小彤遠紅外線熱導儀」的頂級招商顧問。請根據以下設定，產出今日貼文：
+
+【今日資訊】
+- 日期：${date}
+- 核心關鍵字：${keywords}
+- 文案風格：${currentStyle}
+
+【任務要求】
+請針對 FB、IG、Threads 三個平台生成不同邏輯的文案，要求如下：
+
+1. FB (深度信任)：300-500字。要有一個吸引人的大標題，中段描述「美容產業轉型」的必要性，並強調「宙元石專利」與「獲利數據」。結尾必須是：引導私訊「了解代理詳情」。
+2. IG (質感氛圍)：100字內。語氣要像時尚創業女性，附帶 Reels 拍攝建議（例如：儀器運作的慢動作）及 5 個爆款 Hashtag。
+3. Threads (直覺共鳴)：60-100字。用一句話直接扎破痛點，製造討論感，不帶太多表情符號，走冷靜專業風。
+
+【注意事項】
+- 禁止使用「親、小伙伴、集美、給力」等用語。
+- 必須使用台灣道地職場與創業者口吻。
+- 每次按按鈕請給我完全不同的「故事切入點」。`;
+
+        const outputDiv = document.getElementById('promptOutput');
+        const textArea = document.getElementById('finalPrompt');
+        
+        outputDiv.classList.remove('hidden');
+        textArea.value = promptTemplate;
+        
+        // 視覺滾動
+        outputDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    function copyContent(id) {
+        const content = document.getElementById(id);
+        const text = content.value || content.innerText;
+        navigator.clipboard.writeText(text).then(() => {
+            const btn = event.target;
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fa-solid fa-check"></i> 已複製';
+            btn.classList.add('bg-green-500', 'text-white');
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.classList.remove('bg-green-500', 'text-white');
+            }, 2000);
+        });
+    }
+</script>
+
+</body>
+</html>
