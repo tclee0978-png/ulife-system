@@ -3,59 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PeggySPA｜無限招商文案軍師</title>
+    <title>U-Life｜遠紅外線健康生活生成器</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Noto Sans TC', sans-serif; background: #fdf2f2; scroll-behavior: smooth; }
-        .glass-card { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border: 1px solid rgba(230, 0, 18, 0.1); }
-        .style-btn { transition: all 0.3s; border: 2px solid #f3f4f6; }
-        .style-btn.active { background: #e60012; color: white; border-color: #e60012; box-shadow: 0 4px 12px rgba(230, 0, 18, 0.3); transform: translateY(-2px); }
+        body { font-family: 'Noto Sans TC', sans-serif; background: #fdfaf7; scroll-behavior: smooth; }
+        .glass-card { background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(10px); border: 1px solid rgba(255, 126, 33, 0.1); }
+        .style-btn { transition: all 0.3s; border: 2px solid #f1f5f9; background: white; }
+        .style-btn.active { background: #ff7e21; color: white; border-color: #ff7e21; box-shadow: 0 4px 15px rgba(255, 126, 33, 0.4); transform: translateY(-2px); }
         .result-box { min-height: 280px; transition: all 0.3s ease; }
         .scrollbar-hide::-webkit-scrollbar { display: none; }
-        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
-        .generating { animation: pulse 0.4s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+        .generating { animation: pulse 0.3s infinite; }
     </style>
 </head>
-<body class="p-4 md:p-8 pb-32">
+<body class="p-4 md:p-10 pb-32">
 
 <div class="max-w-7xl mx-auto">
-    <header class="text-center mb-10">
-        <h1 class="text-4xl font-black text-[#e60012] mb-2 tracking-tighter">🔥 PeggySPA 無限文案生成器</h1>
-        <p class="text-gray-400 font-medium text-xs tracking-[0.3em] uppercase">Peggy's Infinite AI Copy Engine</p>
+    <header class="text-center mb-12">
+        <div class="inline-block bg-orange-500 text-white px-4 py-1 rounded-full text-xs font-bold tracking-widest mb-4">U-LIFE HEALTH SYSTEM</div>
+        <h1 class="text-4xl md:text-5xl font-black text-[#2d3748] mb-2 tracking-tighter">
+            <span class="text-orange-500">U-Life</span> 遠紅外線健康生活推廣總監
+        </h1>
+        <p class="text-gray-400 font-medium text-sm tracking-[0.3em] uppercase">專業招商文案 AI 無限生成系統</p>
     </header>
 
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
         <div class="lg:col-span-4 space-y-6">
-            <div class="glass-card p-8 rounded-[2.5rem] shadow-xl border-2 border-white">
+            <div class="glass-card p-8 rounded-[2.5rem] shadow-2xl border-2 border-white">
                 <h3 class="text-xl font-black mb-6 flex items-center gap-2 text-gray-700">
-                    <i class="fa-solid fa-dice text-red-500"></i> 點擊風格・無限生成
+                    <i class="fa-solid fa-rocket text-orange-500"></i> 風格選單・隨點隨產
                 </h3>
-                <div class="grid grid-cols-2 gap-4" id="styleGroup">
-                    <button class="style-btn p-5 rounded-2xl text-sm font-black active" onclick="generate('激勵')">溫暖激勵</button>
-                    <button class="style-btn p-5 rounded-2xl text-sm font-black" onclick="generate('犀利')">犀利直球</button>
-                    <button class="style-btn p-5 rounded-2xl text-sm font-black" onclick="generate('數據')">數據獲利</button>
-                    <button class="style-btn p-5 rounded-2xl text-sm font-black" onclick="generate('故事')">感性故事</button>
+                <div class="grid grid-cols-1 gap-4" id="styleGroup">
+                    <button class="style-btn p-5 rounded-2xl text-base font-black active" onclick="generate('總監觀點')">總監犀利觀點</button>
+                    <button class="style-btn p-5 rounded-2xl text-base font-black" onclick="generate('健康財富')">健康財富商機</button>
+                    <button class="style-btn p-5 rounded-2xl text-base font-black" onclick="generate('創業激勵')">熱情創業激勵</button>
+                    <button class="style-btn p-5 rounded-2xl text-base font-black" onclick="generate('團隊故事')">團隊成功故事</button>
                 </div>
 
-                <div class="mt-10 p-6 bg-white/50 rounded-2xl border border-red-50 italic text-red-400 text-xs leading-loose">
-                    * 提示：同一個按鈕可以「連續點擊」，每次都會組裝出不同的內容組合，讓妳發文不撞詞！
+                <div class="mt-10 p-6 bg-orange-50 rounded-3xl border border-orange-100">
+                    <p class="text-orange-800 text-sm font-black mb-2">💡 總監小叮嚀：</p>
+                    <p class="text-orange-600/80 text-xs leading-relaxed font-medium">
+                        好的文案要具備「痛點」與「願景」。同一個按鈕可以多次點擊，每次產出的邏輯皆不相同，讓您的版面充滿多樣性！
+                    </p>
                 </div>
             </div>
         </div>
 
         <div class="lg:col-span-8 grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="glass-card rounded-[2.5rem] shadow-xl overflow-hidden flex flex-col border-t-8 border-blue-600">
-                <div class="p-5 bg-blue-50 flex justify-between items-center"><span class="font-black text-blue-700 text-sm">FB 深度版</span><button onclick="copyText('fb')" class="bg-white px-3 py-1 rounded-full text-[10px] font-bold shadow-sm">複製</button></div>
-                <div id="fb" contenteditable="true" class="result-box p-6 text-sm leading-relaxed text-gray-600 overflow-y-auto scrollbar-hide">點擊按鈕生成...</div>
+            <div class="glass-card rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col border-t-8 border-blue-700">
+                <div class="p-5 bg-blue-50 flex justify-between items-center"><span class="font-black text-blue-800 text-sm italic">FB 深度專業版</span><button onclick="copyText('fb')" class="bg-white text-blue-700 px-3 py-1 rounded-full text-[10px] font-black shadow-sm border border-blue-100">複製</button></div>
+                <div id="fb" contenteditable="true" class="result-box p-6 text-sm leading-relaxed text-gray-600 overflow-y-auto scrollbar-hide">點擊按鈕，開始生成總監級文案...</div>
             </div>
-            <div class="glass-card rounded-[2.5rem] shadow-xl overflow-hidden flex flex-col border-t-8 border-pink-500">
-                <div class="p-5 bg-pink-50 flex justify-between items-center"><span class="font-black text-pink-700 text-sm">IG 質感版</span><button onclick="copyText('ig')" class="bg-white px-3 py-1 rounded-full text-[10px] font-bold shadow-sm">複製</button></div>
+            <div class="glass-card rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col border-t-8 border-orange-500">
+                <div class="p-5 bg-orange-50 flex justify-between items-center"><span class="font-black text-orange-700 text-sm italic">IG 質感視覺版</span><button onclick="copyText('ig')" class="bg-white text-orange-700 px-3 py-1 rounded-full text-[10px] font-black shadow-sm border border-orange-100">複製</button></div>
                 <div id="ig" contenteditable="true" class="result-box p-6 text-sm leading-relaxed text-gray-600 overflow-y-auto scrollbar-hide">點擊按鈕生成...</div>
             </div>
-            <div class="glass-card rounded-[2.5rem] shadow-xl overflow-hidden flex flex-col border-t-8 border-black">
-                <div class="p-5 bg-gray-50 flex justify-between items-center"><span class="font-black text-black text-sm">Threads</span><button onclick="copyText('threads')" class="bg-white px-3 py-1 rounded-full text-[10px] font-bold shadow-sm">複製</button></div>
+            <div class="glass-card rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col border-t-8 border-gray-900">
+                <div class="p-5 bg-gray-100 flex justify-between items-center"><span class="font-black text-black text-sm italic">Threads 觀點版</span><button onclick="copyText('threads')" class="bg-white text-black px-3 py-1 rounded-full text-[10px] font-black shadow-sm border border-gray-200">複製</button></div>
                 <div id="threads" contenteditable="true" class="result-box p-6 text-sm leading-relaxed text-gray-600 overflow-y-auto scrollbar-hide">點擊按鈕生成...</div>
             </div>
         </div>
@@ -64,30 +70,29 @@
 
 <script>
     const pool = {
-        '激勵': {
-            start: ["【夢想不是用來想的】✨", "【妳的努力，值得被看見】🌹", "【給自己一個翻轉的機會】🚀", "【致每一位勇敢的創業女性】💎"],
-            mid: ["PeggySPA 遠紅外線熱導儀，是妳轉型路上的最強後盾。", "這不只是一台儀器，更是一套讓妳優雅獲利的系統。", "我們陪妳從零開始，建立專屬自己的美容事業。", "告別勞力賺錢，用科技與專業找回生活品質。"],
-            end: ["今日僅限2名諮詢，私訊我聊聊吧！", "現在就點擊私訊，開啟妳的蛻變之旅。", "我在成功路上的終點，等妳一起加入。", "留言「+1」領取專屬創業企劃書。"]
+        '總監觀點': {
+            start: ["【2026年，妳還在用身體換錢嗎？】⚖️", "【總監觀點：趨勢比努力更重要】🚀", "【妳的努力，不該只有一種收入】💎", "【別讓現狀，限制了妳對未來的想像】🔥"],
+            mid: ["U-Life 遠紅外線健康系統，不只是儀器，更是一套「被動收入」的經營模組。", "傳統美容師靠體力，U-Life 推廣者靠「科技與系統」建立影響力。", "健康產業是未來的剛需，而我們掌握了最核心的宙元石熱導技術。", "當妳還在觀望，市場已經在重新洗牌。這是一場關於「選擇」的競爭。"],
+            end: ["立刻私訊領取「U-Life 獲利模組分析」。", "想知道總監如何從 0 到 1？私訊「+1」了解詳情。", "機會從不等人，只等敢踏出第一步的人。", "私訊諮詢，我會親自與妳對接創業計畫。"]
         },
-        '犀利': {
-            start: ["【還在靠體力賺錢嗎？】🔥", "【實話往往最難聽】🚀", "【妳的生意為什麼留不住人？】💡", "【別讓觀望毀了妳的商機】⚠️"],
-            mid: ["傳統按摩太累、收入卻有天花板，這就是現實。", "PeggySPA 宙元石專利技術，讓客人一次就黏住。", "市場不會等妳準備好，只會等著把妳淘汰。", "聰明人都在用系統滾雪錢，妳還在用雙手拼命？"],
-            end: ["想轉型的美容師，私訊我，不廢話。", "猶豫只會讓妳錯過最好的時機。", "這是一個看數據說話的時代，來聊聊吧。", "機會只留給敢踏出舒適圈的人。"]
+        '健康財富': {
+            start: ["【健康，是最好的投資，更是最好的商機】💰", "【月獲利翻倍的健康方程式】📊", "【U-Life 總監帶妳看透健康產業藍海】🌊", "【低門檻、高效能、高回購的經營之道】📈"],
+            mid: ["熱導儀單次淨利高達 80%，讓妳的店格瞬間升級。", "不僅能解決客人的僵硬痠痛，更能解決妳的經營痛點。", "宙元石遠紅外線技術，讓客人體驗後就離不開妳。", "從技術培訓到行銷導流，U-Life 提供全方位的保姆級支援。"],
+            end: ["私訊「我要了解」，領取總監親選創業包。", "加入 U-Life，讓健康成為妳最穩定的存摺。", "倒數 3 名創業名額，現在就卡位。", "想在三個月內讓營收翻倍？私訊我聊聊。"]
         },
-        '數據': {
-            start: ["【月收翻倍的精算邏輯】💰", "【低成本、高淨利的商業模版】📊", "【數據揭秘：熱導儀獲利真相】🔍", "【美容店營收暴增的祕密】📈"],
-            mid: ["月獲利 8-15 萬不是夢，關鍵在於專利儀器的回購率。", "耗材成本極低，單次療程淨利高達 70% 以上。", "客源轉介率提升 40%，這就是科技美容的威力。", "完整保姆級教學，縮短妳 90% 的摸索時間。"],
-            end: ["立刻私訊獲取「月入十萬」獲利分析表。", "名額倒數，現在加入最划算。", "報名諮詢，我算給妳看利潤有多大。", "私訊「轉型」，預約一對一事業分析。"]
+        '創業激勵': {
+            start: ["【致每一位不甘平凡的女性】🌸", "【妳值得更優雅地賺錢，更自信地生活】✨", "【把妳的專業，放大成一份事業】🚀", "【給自己一個重新定義成功的機會】💎"],
+            mid: ["在 U-Life，我們不僅傳遞溫熱，更傳遞一份改變人生的勇氣。", "不管妳是美容師、全職媽媽或轉職者，這裡都有妳的位置。", "不用拼命，也能擁有高質感的生活。這就是科技美容的魔力。", "我們不只是合作夥伴，更是共同成長的健康推廣戰友。"],
+            end: ["我在成功路上的頂端，等妳一起加入。", "私訊「我想變強」，開啟妳的創業篇章。", "期待在 U-Life 的大家庭見到蛻變後的妳。", "留言「+1」領取總監創業心法。"]
         },
-        '故事': {
-            start: ["【那晚，她對我說了心聲...】🕯️", "【從全職媽媽到事業女性】🌸", "【這台儀器傳遞的是溫暖】🤝", "【看見她們眼中的光，我懂了】✨"],
-            mid: ["她曾害怕自己跟社會脫節，但在 PeggySPA 找回了自信。", "熱導儀不只暖了客人的身，也暖了創業者疲憊的心。", "我們是一群熱愛分享美的家人，不只是生意夥伴。", "每一位加入的夥伴，都是 Peggy 最珍視的傳承者。"],
-            end: ["加入我們，不只創業，更是遇見更好的自己。", "期待在 PeggySPA 的大家庭見到妳。", "私訊我，聽聽更多夥伴翻轉人生的故事。", "美學創業，從這份溫暖的連結開始。"]
+        '團隊故事': {
+            start: ["【看見她們的蛻變，是我最大的動力】❤️", "【從 0 經驗到月入十萬的真實紀錄】📝", "【這是一場關於溫暖與傳承的旅程】🤝", "【在 U-Life，我們是一家人】🏠"],
+            mid: ["看著團隊夥伴從不敢開口，到現在能自信帶領團隊。", "每一台熱導儀背後，都挽救了一段疲憊的健康與心靈。", "我們不賣儀器，我們分享的是一種「生活方式」。", "感謝 U-Life，讓更多女性找回了在社會中的價值與光芒。"],
+            end: ["加入我們，一起書寫妳的傳奇故事。", "私訊聽聽更多學員的轉型見證。", "想要一個有溫度的事業？U-Life 歡迎妳。", "留言「想聽故事」，我傳夥伴的見證給妳。"]
         }
     };
 
     function generate(type) {
-        // 切換按鈕狀態
         document.querySelectorAll('.style-btn').forEach(b => {
             b.classList.remove('active');
             if(b.innerText.includes(type)) b.classList.add('active');
@@ -97,25 +102,19 @@
         const ig = document.getElementById('ig');
         const th = document.getElementById('threads');
 
-        // 視覺特效
         [fb, ig, th].forEach(el => el.classList.add('generating'));
 
         setTimeout(() => {
             const getRand = (arr) => arr[Math.floor(Math.random() * arr.length)];
             const s = pool[type];
 
-            // FB: 深度組裝
             fb.innerText = `${getRand(s.start)}\n\n${getRand(s.mid)}\n\n${getRand(s.mid)}\n\n${getRand(s.end)}`;
-            
-            // IG: 隨機標籤組裝
-            ig.innerText = `${getRand(s.start)}\n${getRand(s.mid)}\n\n#PeggySPA #美容創業 #熱導儀 #宙元石 #女性創業`;
-            
-            // Threads: 隨機短句組裝
-            th.innerText = `${getRand(s.start)} ${getRand(s.mid)} 想了解的朋友留言「+1」。`;
+            ig.innerText = `${getRand(s.start)}\n${getRand(s.mid)}\n\n#ULife #遠紅外線 #健康生活 #總監推薦 #創業商機 #轉型首選`;
+            th.innerText = `${getRand(s.start)} ${getRand(s.mid)} 同意的朋友留言「+1」。`;
 
             [fb, ig, th].forEach(el => {
                 el.classList.remove('generating');
-                el.classList.remove('text-gray-400', 'italic');
+                el.style.color = '#4a5568';
             });
         }, 400);
     }
@@ -125,8 +124,12 @@
         navigator.clipboard.writeText(text).then(() => {
             const btn = event.target;
             const original = btn.innerText;
-            btn.innerText = 'OK!';
-            setTimeout(() => btn.innerText = original, 1500);
+            btn.innerText = 'COPIED!';
+            btn.classList.add('bg-orange-500', 'text-white');
+            setTimeout(() => {
+                btn.innerText = original;
+                btn.classList.remove('bg-orange-500', 'text-white');
+            }, 1500);
         });
     }
 </script>
