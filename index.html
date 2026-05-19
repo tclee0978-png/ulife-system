@@ -1,146 +1,251 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>U-Life｜五大核心科技生成器</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+    <title>姿彤總監專屬・U-Life 系統文案大腦</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Noto Sans TC', sans-serif; background: #fdfaf7; scroll-behavior: smooth; }
-        .glass-card { background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(10px); border: 1px solid rgba(255, 126, 33, 0.1); }
-        .style-btn { transition: all 0.3s; border: 2px solid #f1f5f9; background: white; cursor: pointer; }
-        .style-btn.active { background: #ff7e21; color: white; border-color: #ff7e21; box-shadow: 0 4px 15px rgba(255, 126, 33, 0.4); transform: translateY(-2px); }
-        .result-box { min-height: 280px; transition: all 0.3s ease; }
-        .tag-pill { background: #fff7ed; color: #ea580c; border: 1px solid #ffedd5; padding: 2px 10px; border-radius: 99px; font-size: 11px; font-weight: bold; }
-        .scrollbar-hide::-webkit-scrollbar { display: none; }
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
-        .generating { animation: pulse 0.3s infinite; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Noto Sans TC', 'PingFang TC', sans-serif; background: #fdf8f3; color: #2d3748; padding: 20px 16px 60px; }
+        .page { max-width: 1200px; margin: 0 auto; }
+
+        .header { text-align: center; margin-bottom: 24px; }
+        .header h1 { font-size: 26px; font-weight: 900; color: #2d3748; }
+        .header h1 span { color: #f97316; }
+        .header p { font-size: 11px; color: #a0aec0; margin-top: 4px; letter-spacing: 2px; text-transform: uppercase; }
+
+        .main-layout { display: grid; grid-template-columns: 340px 1fr; gap: 20px; align-items: start; }
+        @media (max-width: 860px) { .main-layout { grid-template-columns: 1fr; } }
+
+        .left-card { background: #fff; border-radius: 36px; padding: 28px 24px; box-shadow: 0 4px 24px rgba(249,115,22,0.08); border: 1px solid rgba(249,115,22,0.08); }
+
+        /* API Key */
+        .api-wrap { background: #fff8f3; border: 1.5px solid #fde8d0; border-radius: 16px; padding: 14px 16px; margin-bottom: 24px; }
+        .api-label { font-size: 12px; font-weight: 900; color: #f97316; margin-bottom: 8px; }
+        .api-row { display: flex; gap: 8px; }
+        .api-input { flex: 1; padding: 10px 14px; border: 1.5px solid #e2e8f0; border-radius: 12px; font-size: 13px; background: #fff; color: #2d3748; letter-spacing: 2px; font-family: inherit; transition: all 0.2s; }
+        .api-input:focus { outline: none; border-color: #f97316; box-shadow: 0 0 0 3px rgba(249,115,22,0.1); }
+        .eye-btn { background: #f7f7f7; border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 8px 12px; cursor: pointer; font-size: 15px; color: #a0aec0; transition: all 0.2s; }
+        .eye-btn:hover { border-color: #f97316; color: #f97316; }
+        .api-hint { font-size: 11px; color: #a0aec0; margin-top: 7px; line-height: 1.6; }
+        .api-hint a { color: #f97316; font-weight: 700; text-decoration: none; }
+
+        /* 風格選單 */
+        .menu-header { font-size: 20px; font-weight: 900; color: #2d3748; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+        .style-list { display: flex; flex-direction: column; gap: 14px; margin-bottom: 28px; }
+        .style-btn { width: 100%; padding: 22px 20px; border-radius: 22px; font-size: 17px; font-weight: 900; font-family: inherit; cursor: pointer; transition: all 0.25s; text-align: center; border: none; line-height: 1.3; }
+        .style-btn.inactive { background: #f5f5f7; color: #2d3748; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        .style-btn.inactive:hover { background: #fff; box-shadow: 0 4px 16px rgba(249,115,22,0.15); color: #f97316; }
+        .style-btn.active { background: #f97316; color: #fff; box-shadow: 0 6px 24px rgba(249,115,22,0.4); transform: translateY(-1px); }
+        .style-btn:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
+
+        /* 工具列 */
+        .tool-label { font-size: 11px; font-weight: 900; color: #a0aec0; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 10px; }
+        .tools-row { display: flex; gap: 8px; margin-bottom: 6px; }
+        .tool-link { flex: 1; display: flex; align-items: center; justify-content: center; gap: 5px; padding: 11px 6px; border-radius: 14px; font-size: 13px; font-weight: 800; text-decoration: none; color: #fff; transition: all 0.2s; }
+        .tool-link:hover { transform: translateY(-2px); filter: brightness(1.1); }
+        .t-gemini  { background: linear-gradient(135deg,#4285F4,#1a6cf5); box-shadow: 0 3px 12px rgba(66,133,244,0.3); }
+        .t-chatgpt { background: linear-gradient(135deg,#10a37f,#0d8c6b); box-shadow: 0 3px 12px rgba(16,163,127,0.3); }
+        .t-fb      { background: linear-gradient(135deg,#1877f2,#0a5dc2); box-shadow: 0 3px 12px rgba(24,119,242,0.3); }
+        .t-ig      { background: linear-gradient(135deg,#f58529,#dd2a7b,#8134af); box-shadow: 0 3px 12px rgba(221,42,123,0.3); }
+        .t-threads { background: linear-gradient(135deg,#555,#111); box-shadow: 0 3px 12px rgba(0,0,0,0.25); }
+        .tools-hint { font-size: 11px; color: #c0c8d8; text-align: center; margin-top: 5px; }
+
+        /* 右側輸出 */
+        .right-area { display: flex; flex-direction: column; gap: 14px; }
+        .status-bar { background: #fff8f3; border: 1.5px solid #fde8d0; border-radius: 16px; padding: 14px 18px; color: #f97316; font-weight: 900; font-size: 14px; text-align: center; display: none; }
+        .cols-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+        @media (max-width: 860px) { .cols-grid { grid-template-columns: 1fr; } .tools-row { flex-wrap: wrap; } .tool-link { flex: 1 1 40%; } }
+        .col { background: #fff; border-radius: 24px; padding: 20px; display: flex; flex-direction: column; box-shadow: 0 4px 16px rgba(0,0,0,0.04); min-height: 360px; border: 1px solid #f5ede4; }
+        .col-fb { border-top: 5px solid #1877f2; }
+        .col-ig { border-top: 5px solid #e1306c; }
+        .col-threads { border-top: 5px solid #111; }
+        .col-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid #f0f4f8; }
+        .col-name { font-weight: 900; font-size: 13px; font-style: italic; }
+        .n-fb { color: #1877f2; }
+        .n-ig { color: #e1306c; }
+        .n-threads { color: #111; }
+        .copy-btn { background: #fff; border: 1.5px solid #e2e8f0; border-radius: 20px; padding: 4px 14px; font-size: 11px; font-weight: 900; color: #a0aec0; cursor: pointer; font-family: inherit; transition: all 0.2s; }
+        .copy-btn:hover { background: #f97316; color: #fff; border-color: #f97316; }
+        .output-box { flex: 1; background: #fdfaf7; border: 1.5px solid #edf2f7; border-radius: 14px; padding: 14px; font-size: 13.5px; line-height: 1.75; white-space: pre-wrap; color: #4a5568; overflow-y: auto; min-height: 280px; }
     </style>
 </head>
-<body class="p-4 md:p-10 pb-32">
+<body>
+<div class="page">
 
-<div class="max-w-7xl mx-auto">
-    <header class="text-center mb-12">
-        <div class="flex justify-center gap-2 mb-4">
-            <span class="tag-pill">遠紅外線</span><span class="tag-pill">負離子</span><span class="tag-pill">AI 科技</span><span class="tag-pill">健康生活</span><span class="tag-pill">熱導設備</span>
+    <div class="header">
+        <h1>✦ <span>姿彤總監</span> 專屬・U-Life 系統文案大腦</h1>
+        <p>健康・商機・團隊・共好・打造有溫度的大格局系統</p>
+    </div>
+
+    <div class="main-layout">
+        <div class="left-card">
+
+            <div class="api-wrap">
+                <div class="api-label">🔑 Gemini API Key</div>
+                <div class="api-row">
+                    <input type="password" id="userApiKey" class="api-input" placeholder="AIzaSy...">
+                    <button class="eye-btn" onclick="toggleKey()">👁</button>
+                </div>
+                <div class="api-hint">沒有金鑰？<a href="https://aistudio.google.com/app/apikey" target="_blank">點此免費申請</a>（每天 1,500 次免費）</div>
+            </div>
+
+            <div class="menu-header">🚀 風格選單</div>
+            <div class="style-list">
+                <button class="style-btn inactive" id="btn-ai"      onclick="generate('ai')">AI 智慧與未來趨勢</button>
+                <button class="style-btn inactive" id="btn-far"     onclick="generate('far')">遠紅外線與科技修復</button>
+                <button class="style-btn inactive" id="btn-ion"     onclick="generate('ion')">負離子商機獲利</button>
+                <button class="style-btn inactive" id="btn-life"    onclick="generate('life')">U-Life 健康生活藍圖</button>
+            </div>
+
+            <div class="tool-label">🤖 AI 潤飾工具</div>
+            <div class="tools-row" style="margin-bottom:16px;">
+                <a href="https://gemini.google.com/" target="_blank" class="tool-link t-gemini">✦ Gemini</a>
+                <a href="https://chatgpt.com/" target="_blank" class="tool-link t-chatgpt">⚡ ChatGPT</a>
+            </div>
+
+            <div class="tool-label">📲 直接發文</div>
+            <div class="tools-row">
+                <a href="https://www.facebook.com/" target="_blank" class="tool-link t-fb">f FB</a>
+                <a href="https://www.instagram.com/" target="_blank" class="tool-link t-ig">📷 IG</a>
+                <a href="https://www.threads.net/" target="_blank" class="tool-link t-threads">@ TH</a>
+            </div>
+            <div class="tools-hint">複製文案 → 點平台 → 貼上發文</div>
+
         </div>
-        <h1 class="text-4xl md:text-5xl font-black text-[#2d3748] mb-2 tracking-tighter">
-            <span class="text-orange-500">U-Life</span> 健康生活推廣總監
-        </h1>
-        <p class="text-gray-400 font-medium text-sm tracking-[0.3em] uppercase">專屬招商文案 AI 無限生成系統</p>
-    </header>
 
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-        <div class="lg:col-span-4 space-y-6">
-            <div class="glass-card p-8 rounded-[2.5rem] shadow-2xl border-2 border-white">
-                <h3 class="text-xl font-black mb-6 flex items-center gap-2 text-gray-700">
-                    <i class="fa-solid fa-rocket text-orange-500"></i> 風格選單
-                </h3>
-                <div class="grid grid-cols-1 gap-4 mb-10">
-                    <button class="style-btn p-5 rounded-2xl text-base font-black active" onclick="generate('未來趨勢', this)">AI 智慧與未來趨勢</button>
-                    <button class="style-btn p-5 rounded-2xl text-base font-black" onclick="generate('科技修復', this)">遠紅外線與科技修復</button>
-                    <button class="style-btn p-5 rounded-2xl text-base font-black" onclick="generate('商機獲利', this)">負離子商機獲利</button>
-                    <button class="style-btn p-5 rounded-2xl text-base font-black" onclick="generate('健康生活', this)">U-Life 健康生活藍圖</button>
+        <div class="right-area">
+            <div id="statusBar" class="status-bar"></div>
+            <div class="cols-grid">
+                <div class="col col-fb">
+                    <div class="col-head"><span class="col-name n-fb">FB 深度版</span><button class="copy-btn" onclick="copyCol('out-fb',this)">複製</button></div>
+                    <div id="out-fb" class="output-box">點擊左側按鈕開始生成...</div>
                 </div>
-
-                <h3 class="text-sm font-black mb-4 flex items-center gap-2 text-gray-400 uppercase tracking-widest">
-                    <i class="fa-solid fa-microchip"></i> AI 快捷工具
-                </h3>
-                <div class="grid grid-cols-2 gap-3">
-                    <a href="https://gemini.google.com/" target="_blank" class="flex items-center justify-center gap-2 bg-[#4285F4] text-white py-3 rounded-xl text-xs font-bold hover:brightness-110 transition shadow-md">
-                        <i class="fa-solid fa-g"></i> Gemini
-                    </a>
-                    <a href="https://chatgpt.com/" target="_blank" class="flex items-center justify-center gap-2 bg-[#10a37f] text-white py-3 rounded-xl text-xs font-bold hover:brightness-110 transition shadow-md">
-                        <i class="fa-solid fa-bolt"></i> ChatGPT
-                    </a>
+                <div class="col col-ig">
+                    <div class="col-head"><span class="col-name n-ig">IG 視覺版</span><button class="copy-btn" onclick="copyCol('out-ig',this)">複製</button></div>
+                    <div id="out-ig" class="output-box">點擊左側按鈕開始生成...</div>
                 </div>
-            </div>
-        </div>
-
-        <div class="lg:col-span-8 grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="glass-card rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col border-t-8 border-blue-700">
-                <div class="p-5 bg-blue-50 flex justify-between items-center border-b border-blue-100">
-                    <span class="font-black text-blue-800 text-sm italic">FB 深度版</span>
-                    <button onclick="copyText('fb')" class="bg-white text-blue-700 px-3 py-1 rounded-full text-[10px] font-black shadow-sm">複製</button>
+                <div class="col col-threads">
+                    <div class="col-head"><span class="col-name n-threads">Threads 觀點</span><button class="copy-btn" onclick="copyCol('out-threads',this)">複製</button></div>
+                    <div id="out-threads" class="output-box">點擊左側按鈕開始生成...</div>
                 </div>
-                <div id="fb" contenteditable="true" class="result-box p-6 text-sm leading-relaxed text-gray-600 overflow-y-auto scrollbar-hide">點擊按鈕生成...</div>
-            </div>
-            <div class="glass-card rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col border-t-8 border-orange-500">
-                <div class="p-5 bg-orange-50 flex justify-between items-center border-b border-orange-100">
-                    <span class="font-black text-orange-700 text-sm italic">IG 視覺版</span>
-                    <button onclick="copyText('ig')" class="bg-white text-orange-700 px-3 py-1 rounded-full text-[10px] font-black shadow-sm">複製</button>
-                </div>
-                <div id="ig" contenteditable="true" class="result-box p-6 text-sm leading-relaxed text-gray-600 overflow-y-auto scrollbar-hide">點擊按鈕生成...</div>
-            </div>
-            <div class="glass-card rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col border-t-8 border-gray-900">
-                <div class="p-5 bg-gray-50 flex justify-between items-center border-b border-gray-100">
-                    <span class="font-black text-black text-sm italic">Threads 觀點</span>
-                    <button onclick="copyText('threads')" class="bg-white text-black px-3 py-1 rounded-full text-[10px] font-black shadow-sm">複製</button>
-                </div>
-                <div id="threads" contenteditable="true" class="result-box p-6 text-sm leading-relaxed text-gray-600 overflow-y-auto scrollbar-hide">點擊按鈕生成...</div>
             </div>
         </div>
     </div>
 </div>
 
 <script>
-    const dataPool = {
-        '未來趨勢': {
-            start: ["【當 AI 遇上大健康，妳看見商機了嗎？】🤖", "【總監觀點：科技健康生活新標準】🚀", "【未來的獲利模式：AI 智慧與精準健康】💎"],
-            mid: ["U-Life 領先業界將 AI 邏輯導入健康管理，配合高效能熱導設備，實現精準調理。", "這不只是一場技術革命，更是對傳統健康生活方式的全面升級。"],
-            end: ["立刻私訊，獲取 U-Life AI 健康創業報告。", "留言「AI」領取總監親筆撰寫的轉型計畫。"]
-        },
-        '科技修復': {
-            start: ["【負離子＋遠紅外線：雙效修復的奇蹟】✨", "【熱導設備：讓每一顆細胞重新呼吸】🔥", "【為什麼 U-Life 的熱導技術是市場唯一？】🔍"],
-            mid: ["利用遠紅外線深層共振，配合負離子中和環境壓力，達到極致的健康平衡。", "U-Life 專利宙元石技術，將負離子含量提升至森林等級。"],
-            end: ["私訊「健康」，了解 U-Life 核心設備代理權。", "讓科技成為妳照顧全家健康的最好後盾。"]
-        },
-        '商機獲利': {
-            start: ["【健康財富：負離子產業的百億藍海】💰", "【熱導設備代理：美容與健康店家的救星】📈", "【為什麼總監選在今年全面推廣 U-Life？】📊"],
-            mid: ["當負離子科技遇上高效熱導設備，創造的是客人的回購率與店家的淨利潤。", "低門檻切入大健康市場，用 U-Life 的系統實現財務自由。"],
-            end: ["私訊「獲利」，我教妳如何用健康系統滾雪球。", "名額倒數，現在加入享總監資源。"]
-        },
-        '健康生活': {
-            start: ["【U-Life：定義妳的理想健康生活】🌸", "【從負離子空氣到遠紅外線熱感修復】✨", "【這是一份關於愛、科技與傳承的事業】🤝"],
-            mid: ["我們致力於將 AI 智慧融入日常，讓生活充滿負離子的純淨與溫暖。", "U-Life 不只是招商，更是邀請妳成為健康生活的推廣者。"],
-            end: ["私訊了解 U-Life 全方位解決方案。", "留言「+1」，我傳改變人生的藍圖給妳。"]
+const PERSONA = `你現在是「姿彤總監」的專屬社群文案助理，為 U-Life 健康系統撰寫招商與推廣文案。
+
+姿彤總監的人設與核心定位：
+- 溫暖有格局的系統領導者，不是在賣產品，是在傳遞一個讓人生更好的系統
+- 語氣：有觀點、有溫度、有大局感，讓人感覺不跟上這個系統會錯過很多
+- 擅長把健康知識（如蛋白質攝取、遠紅外線、負離子）融入生活場景，讓人感到被關心
+- 偶爾分享真實見證故事（例：今天見了一位技術老師，她說加入後第一個月就...）
+
+文案四大靈魂鉤子（每篇都要埋進去至少兩個）：
+1. 未來感鉤子：讓人感覺時代在變，不跟上系統就會被淘汰或錯過
+2. 招商／異業合作鉤子：共享客源、一起做大、共好共贏的系統思維
+3. 團隊溫度鉤子：我們是一個彼此扶持、共同成長的團隊，不孤單
+4. 健康知識鉤子：偶爾穿插養生小知識（蛋白質、睡眠、遠紅外線修復等），讓人覺得跟著姿彤總監不只賺錢還變健康
+
+平台風格：
+- FB：有故事開頭或見證引入，帶出系統價值，結尾溫暖有力的CTA
+- IG：短句有力，善用emoji，條列系統優勢或健康知識，附5個hashtag
+- Threads：一句讓人停下來的強鉤子，引發共鳴或好奇留言`;
+
+const PROMPTS = {
+    ai: `主題：AI 智慧與未來趨勢
+核心方向：U-Life 系統導入 AI 智慧管理健康與商業，讓夥伴不只跟上趨勢，更走在趨勢前面。強調不懂AI沒關係，系統會帶著你走。偶爾可以穿插健康知識，例如：現代人壓力大，蛋白質攝取不足會讓大腦更容易焦慮，U-Life 系統連這個都幫你想到了。`,
+
+    far: `主題：遠紅外線與科技修復
+核心方向：遠紅外線深層修復身體的科學原理，U-Life 專利技術讓細胞重新呼吸。可以穿插見證故事，例如：今天和一位做了15年美業的技術老師聊，她說導入遠紅外線設備後，回頭客提升了40%，客人說睡眠變好了。強調這不只是健康產品，是異業合作的金鑰。`,
+
+    ion: `主題：負離子商機獲利
+核心方向：負離子產業是百億藍海，U-Life 系統讓夥伴用最低門檻切入最高獲利的市場。強調共享客源、異業合作、團隊共好的商業模式。可以穿插：負離子環境就像森林浴，能降低皮質醇（壓力荷爾蒙），讓人放鬆又提升免疫力。`,
+
+    life: `主題：U-Life 健康生活藍圖
+核心方向：U-Life 不只是一個健康品牌，是一套讓人生更好的完整系統。從身體健康到財務健康，從個人成長到團隊共贏。可以穿插見證：今天一位加入6個月的媽媽傳訊息給我，說她不只身體變好了，還因為系統多了一份穩定收入，終於有底氣帶孩子去旅行了。健康知識穿插：每天攝取足夠蛋白質（體重公斤數x1.2克），是維持活力與肌肉的基礎。`
+};
+
+function toggleKey() {
+    const el = document.getElementById('userApiKey');
+    el.type = el.type === 'password' ? 'text' : 'password';
+}
+
+async function generate(type) {
+    const userKey = document.getElementById('userApiKey').value.trim();
+    if (!userKey) { alert('請先輸入您的 Gemini API Key！'); return; }
+
+    document.querySelectorAll('.style-btn').forEach(b => { b.classList.remove('active'); b.classList.add('inactive'); b.disabled = true; });
+    document.getElementById('btn-' + type).classList.add('active');
+    document.getElementById('btn-' + type).classList.remove('inactive');
+
+    const status = document.getElementById('statusBar');
+    const fbOut  = document.getElementById('out-fb');
+    const igOut  = document.getElementById('out-ig');
+    const thOut  = document.getElementById('out-threads');
+
+    status.style.display = 'block';
+    status.innerText = '✨ 姿彤總監系統文案生成中，請稍候...';
+    fbOut.innerText = '正在撰寫深度系統長文...';
+    igOut.innerText = '精煉條列版生成中...';
+    thOut.innerText = '強鉤子觀點醞釀中...';
+
+    const prompt = `${PERSONA}\n\n${PROMPTS[type]}\n\n請只回傳 JSON 格式，不要任何 Markdown 標記或說明文字：\n{"fb":"完整FB文案","ig":"完整IG文案含emoji與hashtag","threads":"完整Threads文案"}`;
+
+    try {
+        const res = await fetch(
+            `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${userKey}`,
+            {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+            }
+        );
+        const data = await res.json();
+
+        if (data.error) {
+            if (data.error.code === 429) throw new Error('RATE_LIMIT');
+            if (data.error.code === 400 || data.error.code === 403) throw new Error('KEY_INVALID');
+            throw new Error(data.error.message);
         }
-    };
 
-    function generate(type, btn) {
-        // 更新按鈕樣式
-        document.querySelectorAll('.style-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
+        let raw = data.candidates[0].content.parts[0].text;
+        raw = raw.replace(/```json|```/gi, '').trim();
+        const result = JSON.parse(raw);
 
-        const fb = document.getElementById('fb');
-        const ig = document.getElementById('ig');
-        const th = document.getElementById('threads');
+        fbOut.innerText = result.fb      || '生成失敗，請再試一次';
+        igOut.innerText = result.ig      || '生成失敗，請再試一次';
+        thOut.innerText = result.threads || '生成失敗，請再試一次';
+        status.style.display = 'none';
 
-        [fb, ig, th].forEach(el => el.classList.add('generating'));
-
-        setTimeout(() => {
-            const getRand = (arr) => arr[Math.floor(Math.random() * arr.length)];
-            const s = dataPool[type];
-
-            fb.innerText = `${getRand(s.start)}\n\n${getRand(s.mid)}\n\n${getRand(s.end)}`;
-            ig.innerText = `${getRand(s.start)}\n${getRand(s.mid)}\n\n#ULife #遠紅外線 #負離子 #AI科技 #健康生活`;
-            th.innerText = `${getRand(s.start)} ${getRand(s.mid)} 認同的請分享。`;
-
-            [fb, ig, th].forEach(el => el.classList.remove('generating'));
-        }, 300);
+    } catch (err) {
+        console.error(err);
+        status.style.display = 'none';
+        fbOut.innerText = igOut.innerText = thOut.innerText = '❌ 發生錯誤，請再試一次';
+        if (err.message === 'KEY_INVALID') {
+            alert('【金鑰無效】\n請重新去 aistudio.google.com 申請新的 API Key，確認複製時沒有多餘空格。');
+        } else if (err.message === 'RATE_LIMIT') {
+            alert('【頻率限制】\n請等 60 秒後再按一次，免費通道每分鐘有次數限制。');
+        } else {
+            alert('【錯誤訊息】' + err.message + '\n請截圖傳給我看。');
+        }
+    } finally {
+        document.querySelectorAll('.style-btn').forEach(b => b.disabled = false);
     }
+}
 
-    function copyText(id) {
-        const text = document.getElementById(id).innerText;
-        navigator.clipboard.writeText(text).then(() => {
-            const btn = event.target;
-            const original = btn.innerText;
-            btn.innerText = 'OK!';
-            setTimeout(() => btn.innerText = original, 1500);
-        });
-    }
+function copyCol(id, btn) {
+    const text = document.getElementById(id).innerText;
+    if (!text || text.includes('...') || text.startsWith('❌') || text.startsWith('點擊')) return;
+    navigator.clipboard.writeText(text).then(() => {
+        const orig = btn.innerText;
+        btn.innerText = '✓ 已複製';
+        setTimeout(() => btn.innerText = orig, 2000);
+    });
+}
 </script>
 </body>
 </html>
