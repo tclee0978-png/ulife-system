@@ -1,306 +1,386 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>姿彤總監專屬・U-Life 系統文案大腦</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Noto Sans TC', 'PingFang TC', sans-serif; background: #fdf8f3; color: #2d3748; padding: 20px 16px 60px; }
-        .page { max-width: 1200px; margin: 0 auto; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dear Yu Flower 友熙花苑・AI 文案大腦</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Noto+Serif+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --rose:#8C6259; --rose-lt:#C29B91; --cream:#FDFBF7;
+  --petal:#F5EDE8; --border:#EDE5DF; --ink:#3D2B26;
+  --muted:#9C857E; --gold:#B8995A;
+}
+body { font-family:'Noto Serif TC',serif; background:var(--cream); color:var(--ink); min-height:100vh; display:flex; flex-direction:column; }
 
-        .header { text-align: center; margin-bottom: 24px; }
-        .header h1 { font-size: 26px; font-weight: 900; color: #2d3748; }
-        .header h1 span { color: #f97316; }
-        .header p { font-size: 11px; color: #a0aec0; margin-top: 4px; letter-spacing: 2px; text-transform: uppercase; }
+/* HEADER */
+header { background:linear-gradient(135deg,#3D2B26 0%,#5C3D36 60%,#7A5048 100%); padding:28px 24px 22px; text-align:center; position:relative; overflow:hidden; }
+header::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 70% 50%,rgba(184,153,90,.15) 0%,transparent 70%); pointer-events:none; }
+.header-en { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1.8rem; color:var(--gold); letter-spacing:.12em; }
+.header-zh { font-size:.68rem; color:rgba(255,255,255,.45); letter-spacing:.35em; margin-top:5px; text-transform:uppercase; }
+.header-tag { font-size:.7rem; color:rgba(255,255,255,.3); margin-top:9px; letter-spacing:.07em; font-weight:300; }
 
-        .main-layout { display: grid; grid-template-columns: 340px 1fr; gap: 20px; align-items: start; }
-        @media (max-width: 860px) { .main-layout { grid-template-columns: 1fr; } }
+/* CONTAINER */
+.wrap { max-width:1100px; margin:0 auto; padding:20px 16px 40px; flex:1; display:flex; flex-direction:column; gap:15px; }
 
-        .left-card { background: #fff; border-radius: 36px; padding: 28px 24px; box-shadow: 0 4px 24px rgba(249,115,22,0.08); border: 1px solid rgba(249,115,22,0.08); }
+/* CARD */
+.card { background:#fff; border:1px solid var(--border); border-radius:16px; padding:18px 20px; }
+.card-label { font-size:.62rem; letter-spacing:.28em; color:var(--rose); text-transform:uppercase; margin-bottom:12px; display:flex; align-items:center; gap:7px; }
+.card-label::before { content:''; width:18px; height:1px; background:var(--rose-lt); flex-shrink:0; }
 
-        /* API Key */
-        .api-wrap { background: #fff8f3; border: 1.5px solid #fde8d0; border-radius: 16px; padding: 14px 16px; margin-bottom: 24px; position: relative; }
-        .api-label { font-size: 12px; font-weight: 900; color: #f97316; margin-bottom: 8px; }
-        .api-row { display: flex; gap: 8px; }
-        .api-input { flex: 1; padding: 10px 14px; border: 1.5px solid #e2e8f0; border-radius: 12px; font-size: 13px; background: #fff; color: #2d3748; letter-spacing: 2px; font-family: inherit; transition: all 0.2s; }
-        .api-input:focus { outline: none; border-color: #f97316; box-shadow: 0 0 0 3px rgba(249,115,22,0.1); }
-        .eye-btn { background: #f7f7f7; border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 8px 12px; cursor: pointer; font-size: 15px; color: #a0aec0; transition: all 0.2s; }
-        .eye-btn:hover { border-color: #f97316; color: #f97316; }
-        .api-hint { font-size: 11px; color: #a0aec0; margin-top: 7px; line-height: 1.6; }
-        .api-hint a { color: #f97316; font-weight: 700; text-decoration: none; }
+/* API ROW */
+.api-row { display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+.api-wrap { flex:1; min-width:200px; position:relative; }
+.api-wrap input { width:100%; border:1px solid var(--border); border-radius:10px; padding:10px 78px 10px 14px; font-size:.8rem; font-family:monospace; color:var(--ink); background:var(--cream); outline:none; transition:border-color .2s; }
+.api-wrap input:focus { border-color:var(--rose); }
+.api-wrap input::placeholder { font-family:'Noto Serif TC',serif; color:#ccc; letter-spacing:0; font-size:.75rem; }
+.api-eye { position:absolute; right:36px; top:50%; transform:translateY(-50%); background:none; border:none; cursor:pointer; font-size:.82rem; color:var(--muted); padding:3px; }
+.api-eye:hover { color:var(--rose); }
+.api-x { position:absolute; right:10px; top:50%; transform:translateY(-50%); background:none; border:none; cursor:pointer; font-size:.75rem; color:#ccc; padding:3px; }
+.api-x:hover { color:#e57373; }
+.api-hint { font-size:.65rem; color:var(--muted); }
+.api-hint a { color:var(--rose); text-decoration:none; }
+.api-hint a:hover { text-decoration:underline; }
 
-        /* 風格選單 */
-        .menu-header { font-size: 20px; font-weight: 900; color: #2d3748; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
-        .style-list { display: flex; flex-direction: column; gap: 14px; margin-bottom: 28px; }
-        .style-btn { width: 100%; padding: 22px 20px; border-radius: 22px; font-size: 17px; font-weight: 900; font-family: inherit; cursor: pointer; transition: all 0.25s; text-align: center; border: none; line-height: 1.3; position: relative; z-index: 10; }
-        .style-btn.inactive { background: #f5f5f7; color: #2d3748; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-        .style-btn.inactive:hover { background: #fff; box-shadow: 0 4px 16px rgba(249,115,22,0.15); color: #f97316; }
-        .style-btn.active { background: #f97316; color: #fff; box-shadow: 0 6px 24px rgba(249,115,22,0.4); transform: translateY(-1px); }
-        .style-btn:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
+/* TOPIC GRID */
+.topic-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+@media(max-width:480px){ .topic-grid{grid-template-columns:1fr;} }
+.topic-btn { width:100%; border:1px solid var(--border); border-radius:12px; padding:14px 16px; background:var(--petal); cursor:pointer; text-align:left; transition:all .22s; display:flex; flex-direction:column; gap:4px; border:none; line-height:1.3; }
+.topic-btn.inactive { background: var(--petal); color: var(--ink); box-shadow: 0 2px 8px rgba(0,0,0,0.02); border: 1px solid var(--border); }
+.topic-btn.inactive:hover { background:#fff; border-color:var(--rose-lt); box-shadow:0 4px 14px rgba(140,98,89,.15); color:var(--rose); }
+.topic-btn.active { border:1px solid var(--rose); background:var(--rose); color:#fff; box-shadow:0 6px 20px rgba(140,98,89,.3); transform: translateY(-1px); }
+.topic-btn.active .t-sub { color:rgba(255,255,255,.7); }
+.topic-btn:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
+.t-icon { font-size:1.1rem; }
+.t-main { font-size:.82rem; font-weight:500; letter-spacing:.06em; }
+.t-sub  { font-size:.65rem; color:var(--muted); letter-spacing:.04em; }
 
-        /* 工具列 */
-        .tool-label { font-size: 11px; font-weight: 900; color: #a0aec0; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 10px; }
-        .tools-row { display: flex; gap: 8px; margin-bottom: 6px; }
-        .tool-link { flex: 1; display: flex; align-items: center; justify-content: center; gap: 5px; padding: 11px 6px; border-radius: 14px; font-size: 13px; font-weight: 800; text-decoration: none; color: #fff; transition: all 0.2s; }
-        .tool-link:hover { transform: translateY(-2px); filter: brightness(1.1); }
-        .t-gemini   { background: linear-gradient(135deg,#4285F4,#1a6cf5); box-shadow: 0 3px 12px rgba(66,133,244,0.3); }
-        .t-chatgpt { background: linear-gradient(135deg,#10a37f,#0d8c6b); box-shadow: 0 3px 12px rgba(16,163,127,0.3); }
-        .t-fb      { background: linear-gradient(135deg,#1877f2,#0a5dc2); box-shadow: 0 3px 12px rgba(24,119,242,0.3); }
-        .t-ig      { background: linear-gradient(135deg,#f58529,#dd2a7b,#8134af); box-shadow: 0 3px 12px rgba(221,42,123,0.3); }
-        .t-threads { background: linear-gradient(135deg,#555,#111); box-shadow: 0 3px 12px rgba(0,0,0,0.25); }
-        .tools-hint { font-size: 11px; color: #c0c8d8; text-align: center; margin-top: 5px; }
+/* LINK ROW */
+.link-row { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+.link-label { font-size:.62rem; color:var(--muted); letter-spacing:.14em; }
+.plink { display:inline-flex; align-items:center; gap:5px; padding:6px 12px; border-radius:8px; font-size:.7rem; letter-spacing:.05em; text-decoration:none; font-weight:500; transition:all .2s; }
+.plink:hover { transform:translateY(-2px); filter: brightness(1.1); }
+.plink.fb { background:#1877F2; color:#fff; }
+.plink.ig { background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); color:#fff; }
+.plink.th { background:#111; color:#fff; }
 
-        /* 右側輸出 */
-        .right-area { display: flex; flex-direction: column; gap: 14px; }
-        .status-bar { background: #fff8f3; border: 1.5px solid #fde8d0; border-radius: 16px; padding: 14px 18px; color: #f97316; font-weight: 900; font-size: 14px; text-align: center; display: none; }
-        .cols-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-        @media (max-width: 860px) { .cols-grid { grid-template-columns: 1fr; } .tools-row { flex-wrap: wrap; } .tool-link { flex: 1 1 40%; } }
-        .col { background: #fff; border-radius: 24px; padding: 20px; display: flex; flex-direction: column; box-shadow: 0 4px 16px rgba(0,0,0,0.04); min-height: 360px; border: 1px solid #f5ede4; }
-        .col-fb { border-top: 5px solid #1877f2; }
-        .col-ig { border-top: 5px solid #e1306c; }
-        .col-threads { border-top: 5px solid #111; }
-        .col-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid #f0f4f8; }
-        .col-name { font-weight: 900; font-size: 13px; font-style: italic; }
-        .n-fb { color: #1877f2; }
-        .n-ig { color: #e1306c; }
-        .n-threads { color: #111; }
-        .copy-btn { background: #fff; border: 1.5px solid #e2e8f0; border-radius: 20px; padding: 4px 14px; font-size: 11px; font-weight: 900; color: #a0aec0; cursor: pointer; font-family: inherit; transition: all 0.2s; }
-        .copy-btn:hover { background: #f97316; color: #fff; border-color: #f97316; }
-        .output-box { flex: 1; background: #fdfaf7; border: 1.5px solid #edf2f7; border-radius: 14px; padding: 14px; font-size: 13.5px; line-height: 1.75; white-space: pre-wrap; color: #4a5568; overflow-y: auto; min-height: 280px; word-break: break-word; }
-        .out-text { font-size: 13.5px; color: #4a5568; line-height: 1.8; }
-    </style>
+/* OUTPUT */
+.out-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+@media(max-width:680px){ .out-grid{grid-template-columns:1fr;} }
+.out-col { display:flex; flex-direction:column; }
+.out-head { display:flex; align-items:center; justify-content:space-between; padding:10px 14px; border-radius:12px 12px 0 0; border:1px solid var(--border); border-bottom:none; }
+.out-head.fb-h { background:#EEF4FF; }
+.out-head.ig-h { background:#FFF0F5; }
+.out-head.th-h { background:#F3F3F3; }
+.out-plat { font-size:.68rem; font-weight:500; letter-spacing:.1em; display:flex; align-items:center; gap:5px; }
+.out-plat.fb { color:#1877F2; }
+.out-plat.ig { color:#C13584; }
+.out-plat.th { color:#111; }
+.copy-btn { font-size:.62rem; letter-spacing:.1em; padding:4px 10px; border-radius:6px; border:1px solid var(--border); background:#fff; cursor:pointer; color:var(--muted); transition:all .2s; font-family: inherit; }
+.copy-btn:hover { border-color:var(--rose); color:var(--rose); }
+.copy-btn.ok { background:#22c55e; color:#fff; border-color:#22c55e; }
+.out-body { border:1px solid var(--border); border-top:none; border-radius:0 0 12px 12px; background:#fff; padding:14px; min-height:260px; flex:1; display:flex; flex-direction:column; }
+.output-box { flex:1; background:#fff; font-size:.78rem; line-height:1.9; color:#555; white-space:pre-wrap; word-break:break-word; overflow-y:auto; }
+.out-text { font-size:.78rem; line-height:1.9; color:#555; }
+.out-ph { font-size:.72rem; color:#ccc; letter-spacing:.06em; text-align:center; margin-top:60px; }
+
+/* STATUS BAR */
+.status-bar { background:#fff; border:1px solid var(--border); border-radius:12px; padding:12px; color:var(--rose); font-weight:600; font-size:0.75rem; text-align:center; display:none; letter-spacing: 0.1em; }
+
+footer { text-align:center; padding:16px; font-size:.6rem; color:#ccc; letter-spacing:.2em; border-top:1px solid var(--border); }
+</style>
 </head>
 <body>
-<div class="page">
 
-    <div class="header">
-        <h1>✦ <span>姿彤總監</span> 專屬・U-Life 系統文案大腦</h1>
-        <p>健康・商機・團隊・共好・打造有溫度的大格局系統</p>
+<header>
+  <div class="header-en">Dear Yu Flower</div>
+  <div class="header-zh">友熙花苑・AI 文案大腦</div>
+  <div class="header-tag">鈔票花束 ‧ 純手工排單 ‧ 浪漫實用兼得的頂級花藝禮品</div>
+</header>
+
+<div class="wrap">
+
+  <!-- API KEY -->
+  <div class="card">
+    <div class="card-label">🔑 Gemini API Key</div>
+    <div class="api-row">
+      <div class="api-wrap">
+        <input type="password" id="apiKey" placeholder="AIzaSy... 貼上您的 Gemini API Key">
+        <button class="api-eye" onclick="toggleKey()">👁</button>
+        <button class="api-x" onclick="document.getElementById('apiKey').value=''">✕</button>
+      </div>
+      <span class="api-hint">沒有金鑰？<a href="https://aistudio.google.com/app/apikey" target="_blank">點此免費申請</a>（每天 1,500 次免費）</span>
     </div>
+  </div>
 
-    <div class="main-layout">
-        <div class="left-card">
-
-            <div class="api-wrap">
-                <div class="api-label">🔑 Gemini API Key</div>
-                <div class="api-row">
-                    <input type="password" id="userApiKey" class="api-input" placeholder="AIzaSy...">
-                    <button class="eye-btn" onclick="toggleKey()">👁</button>
-                </div>
-                <div class="api-hint">沒有金鑰？<a href="https://aistudio.google.com/app/apikey" target="_blank">點此免費申請</a>（每天 1,500 次免費）</div>
-            </div>
-
-            <div class="menu-header">🚀 風格選單</div>
-            <div class="style-list">
-                <button class="style-btn inactive" id="btn-ai"      onclick="generate('ai')">AI 智慧與未來趨勢</button>
-                <button class="style-btn inactive" id="btn-far"     onclick="generate('far')">遠紅外線與科技修復</button>
-                <button class="style-btn inactive" id="btn-ion"     onclick="generate('ion')">負離子商機獲利</button>
-                <button class="style-btn inactive" id="btn-life"    onclick="generate('life')">U-Life 健康生活藍圖</button>
-            </div>
-
-            <div class="tool-label">🤖 AI 潤飾工具</div>
-            <div class="tools-row" style="margin-bottom:16px;">
-                <a href="https://gemini.google.com/" target="_blank" class="tool-link t-gemini">✦ Gemini</a>
-                <a href="https://chatgpt.com/" target="_blank" class="tool-link t-chatgpt">⚡ ChatGPT</a>
-            </div>
-
-            <div class="tool-label">📲 直接發文</div>
-            <div class="tools-row">
-                <a href="https://www.facebook.com/" target="_blank" class="tool-link t-fb">f FB</a>
-                <a href="https://www.instagram.com/" target="_blank" class="tool-link t-ig">📷 IG</a>
-                <a href="https://www.threads.net/" target="_blank" class="tool-link t-threads">@ TH</a>
-            </div>
-            <div class="tools-hint">複製文案 → 點平台 → 貼上發文</div>
-
-        </div>
-
-        <div class="right-area">
-            <div id="statusBar" class="status-bar"></div>
-            <div class="cols-grid">
-                <div class="col col-fb">
-                    <div class="col-head"><span class="col-name n-fb">FB 深度版</span><button class="copy-btn" onclick="copyCol('out-fb',this)">複製</button></div>
-                    <div id="out-fb" class="output-box">點擊左側按鈕開始生成...</div>
-                </div>
-                <div class="col col-ig">
-                    <div class="col-head"><span class="col-name n-ig">IG 視覺版</span><button class="copy-btn" onclick="copyCol('out-ig',this)">複製</button></div>
-                    <div id="out-ig" class="output-box">點擊左側按鈕開始生成...</div>
-                </div>
-                <div class="col col-threads">
-                    <div class="col-head"><span class="col-name n-threads">Threads 觀點</span><button class="copy-btn" onclick="copyCol('out-threads',this)">複製</button></div>
-                    <div id="out-threads" class="output-box">點擊左側按鈕開始生成...</div>
-                </div>
-            </div>
-        </div>
+  <!-- TOPIC BUTTONS -->
+  <div class="card">
+    <div class="card-label">🚀 選擇主題・一鍵生成三平台文案</div>
+    <div class="topic-grid">
+      <button class="topic-btn inactive" id="btn-god" onclick="triggerGenerate('god')">
+        <span class="t-icon">🏮</span>
+        <span class="t-main">敬神有錢花</span>
+        <span class="t-sub">開市拜拜・神明桌上最有誠意的供品</span>
+      </button>
+      <button class="topic-btn inactive" id="btn-wife" onclick="triggerGenerate('wife')">
+        <span class="t-icon">💕</span>
+        <span class="t-main">寵妻故事</span>
+        <span class="t-sub">別人老公送花，我老公送有錢花</span>
+      </button>
+      <button class="topic-btn inactive" id="btn-propose" onclick="triggerGenerate('propose')">
+        <span class="t-icon">💍</span>
+        <span class="t-main">浪漫告白求婚</span>
+        <span class="t-sub">底氣十足的幽默霸氣</span>
+      </button>
+      <button class="topic-btn inactive" id="btn-bday" onclick="triggerGenerate('bday')">
+        <span class="t-icon">🎂</span>
+        <span class="t-main">生日驚喜</span>
+        <span class="t-sub">讓全場側目的 IG 爆款禮</span>
+      </button>
     </div>
+  </div>
+
+  <!-- STATUS BAR -->
+  <div id="statusBar" class="status-bar"></div>
+
+  <!-- PLATFORM LINKS -->
+  <div class="card" style="padding:13px 18px;">
+    <div class="link-row">
+      <span class="link-label">📲 直接發文</span>
+      <a class="plink fb" href="https://www.facebook.com/" target="_blank">f &nbsp;FB</a>
+      <a class="plink ig" href="https://www.instagram.com/" target="_blank">📷 IG</a>
+      <a class="plink th" href="https://www.threads.net/" target="_blank">@ Threads</a>
+      <span class="link-label" style="margin-left:4px;">複製文案 → 點平台 → 貼上發文</span>
+    </div>
+  </div>
+
+  <!-- OUTPUT COLUMNS -->
+  <div class="out-grid">
+    <div class="out-col">
+      <div class="out-head fb-h">
+        <span class="out-plat fb">f &nbsp;Facebook 深度版</span>
+        <button class="copy-btn" onclick="copyCol('fbContent',this)">複製</button>
+      </div>
+      <div class="out-body">
+        <div id="fbContent" class="output-box"><div class="out-ph">點擊上方按鈕開始生成...</div></div>
+      </div>
+    </div>
+    <div class="out-col">
+      <div class="out-head ig-h">
+        <span class="out-plat ig">📷 Instagram 視覺版</span>
+        <button class="copy-btn" onclick="copyCol('igContent',this)">複製</button>
+      </div>
+      <div class="out-body">
+        <div id="igContent" class="output-box"><div class="out-ph">點擊上方按鈕開始生成...</div></div>
+      </div>
+    </div>
+    <div class="out-col">
+      <div class="out-head th-h">
+        <span class="out-plat th">@ Threads 觀點版</span>
+        <button class="copy-btn" onclick="copyCol('thContent',this)">複製</button>
+      </div>
+      <div class="out-body">
+        <div id="thContent" class="output-box"><div class="out-ph">點擊上方按鈕開始生成...</div></div>
+      </div>
+    </div>
+  </div>
+
 </div>
+<footer>DEAR YU FLOWER ‧ 友熙花苑 AI 文案系統 © 2026</footer>
+<div id="toast"></div>
 
 <script>
-const PERSONA = `你現在是「姿彤總監」的專屬社群文案助理，為 U-Life 健康系統撰寫招商與推廣文案。
+var currentTopic = null;
+var isLoading = false;
 
-姿彤總監的人設與核心定位：
-- 溫暖有格局的系統領導者，不是在賣產品，是在傳遞一個讓人生更好的系統
-- 語氣：有觀點、有溫度、有大局感，讓人感覺不跟上這個系統會錯過很多
-- 擅長把健康知識（如蛋白質攝取、遠紅外線、負離子）融入生活場景，讓人感到被關心
-- 偶爾分享真實見證故事（例：今天見了一位技術老師，她說加入後第一個月就...）
-
-文案四大靈魂鉤子（每篇都要埋進去至少兩個）：
-1. 未來感鉤子：讓人感覺時代在變，不跟上系統就會被淘汰或錯過
-2. 招商／異業合作鉤子：共享客源、一起做大、共好共贏的系統思維
-3. 團隊溫度鉤子：我們是一個彼此扶持、共同成長的團隊，不孤單
-4. 健康知識鉤子：偶爾穿插養生小知識（蛋白質、睡眠、遠紅外線修復等），讓人覺得跟著姿彤總監不只賺錢還變健康
-
-平台風格：
-- FB：有故事開頭或見證引入，帶出系統價值，結尾溫暖有力的CTA
-- IG：短句有力，善用emoji，條列系統優勢或健康知識，附5個hashtag
-- Threads：一句讓人停下來的強鉤子，引發共鳴或好奇留言`;
-
-const PROMPTS = {
-    ai: `主題：AI 智慧與未來趨勢
-核心方向：U-Life 系統導入 AI 智慧管理健康與商業，讓夥伴不只跟上趨勢，更走在趨勢前面。強調不懂AI沒關係，系統會帶著你走。偶爾可以穿插健康知識，例如：現代人壓力大，蛋白質攝取不足會讓大腦更容易焦慮，U-Life 系統連這個都幫你想到了。`,
-
-    far: `主題：遠紅外線與科技修復
-核心方向：遠紅外線深層修復身體的科學原理，U-Life 專利技術讓細胞重新呼吸。可以穿插見證故事，例如：今天和一位做了15年美業的技術老師聊，她說導入遠紅外線設備後，回頭客提升了40%，客人說睡眠變好了。強調這不只是健康產品，是異業合作的金鑰。`,
-
-    ion: `主題：負離子商機獲利
-核心方向：負離子產業是百億藍海，U-Life 系統讓夥伴用最低門檻切入最高獲利的市場。強調共享客源、異業合作、團隊共好的商業模式。可以穿插：負離子環境就像森林浴，能降低皮質醇（壓力荷爾蒙），讓人放鬆又提升免疫力。`,
-
-    life: `主題：U-Life 健康生活藍圖
-核心方向：U-Life 不只是一個健康品牌，是一套讓人生更好的完整系統。從身體健康到財務健康，從個人成長到團隊共贏。可以穿插見證：今天一位加入6個月的媽媽傳訊息給我，說她不只身體變好了，還因為系統多了一份穩定收入，終於有底氣帶孩子去旅行了。健康知識穿插：每天攝取足夠蛋白質（體重公斤數x1.2克），是維持活力與肌肉的基礎。`
+var topics = {
+  god:     { label: '敬神有錢花',   desc: '開市拜拜、神明桌供品、年節祭祀，用真鈔排成的花束敬神明，誠意滿滿又討喜' },
+  wife:    { label: '寵妻故事',     desc: '別人老公送會枯萎的玫瑰，我老公送有錢花，讓老婆在閨蜜圈贏麻了的尊榮感' },
+  propose: { label: '浪漫告白求婚', desc: '帶著鈔票花束告白求婚，霸氣展現我準備好了讓你有錢花一輩子的底氣' },
+  bday:    { label: '生日驚喜',     desc: '讓壽星在現場驚呼、讓全場側目、讓照片在IG衝破讚數，最難忘的生日禮物' }
 };
 
+var topicExtra = {
+  god: '【場景定位：敬神有錢花】\n文案切入點：在台灣傳統與開市文化中，用「真鈔」敬神是最高誠意。友熙花苑將真鈔化為頂級花藝，自帶「有錢花」的財運吉兆。適用開市大吉、神明誕辰、年節祭祀。語氣要「三分虔誠、七分幽默霸氣」。FB版要寫出從「隔壁店面驚呆」到「神明看著都發笑」的討喜日常；IG版強調視覺震撼；Threads版開頭必須是一句關於發財或敬神的霸氣金句。\n專屬標籤：#開市大吉 #敬神有錢花 #財運旺旺來 #最霸氣供品 #土地公聖誕',
+  wife: '【場景定位：寵妻故事】\n核心爽點：打破「送花浪費錢」與「送紅包沒情調」的千古難題。別人的老公送三天就枯萎的玫瑰，我老公送「有熙（有錢）花」，極致浪漫與絕對實用兼得。文案要寫出讓老婆忍不住截圖傳閨蜜圈、在社群大贏特贏的尊榮感。Threads版開頭必須是一句直擊男士「安太座求生慾」或女士「頂級炫耀」的犀利金句。\n專屬標籤：#寵妻日常 #神隊友認證 #有錢花比玫瑰實際 #天天有錢花 #安太座教科書',
+  propose: '【場景定位：浪漫告白求婚】\n文案切入點：這束花不是世俗的炫富，而是宣示「我對我們的未來，已經準備好最實質的底氣與承諾」。用高格調的幽默化解緊張：別人只承諾愛妳一輩子，我直接把攜手生活的誠意捧到妳面前。FB版要具備電影般的告白畫面感與承諾的厚重度；Threads版開頭要用一句兼具霸氣與高級幽默的告白金句打破傳統求婚套路。\n專屬標籤：#求婚必備 #告白神器 #走向幸福 #實力派浪漫 #非典型求婚',
+  bday: '【場景定位：生日驚喜】\n文案切入點：這是一份讓壽星當場驚呼、全場焦點瞬間鎖定、照片在IG衝破讚數的「社群大殺器」。強調「今天全場我最紅」的尊榮感，送給閨蜜或摯愛都面子撐到最頂。文案要充滿時尚感、派對感、與懂得玩生活的儀式感。Threads版開頭必須是一句讓人一秒想轉發的生日奢華金句。\n專屬標籤：#生日快樂 #最難忘的生日禮物 #壽星本人已驚呼 #IG爆款 #派對焦點'
+};
+
+var brandDNA = '你是「Dear Yu Flower 友熙花苑」的頂級行銷創意總監。\n\n' +
+  '【品牌靈魂：友熙＝有錢花】\n' +
+  '我們提供的是「實體化的極致寵愛」——將真鈔轉化為高雅的高訂花藝藝術，讓送禮人面子滿分，收禮人產生「我比別人都更被重視、更被溺愛」的頂級尊榮感。\n' +
+  '【品牌字眼藝術】口吻必須【幽默、霸氣、自帶高級感】，文字質感要像國際時尚精品雜誌，絕不落入煽情說教或粗俗銅臭，是用美學包裝物質，用幽默展現霸氣。\n\n' +
+  '【高訂工藝與細節承諾】\n' +
+  '每張真鈔皆由花苑大師純手工完美排單，嚴格要求「不折損、不留任何痕跡、不傷鈔票表面」，包裝細節苛求極致。我們送的是高訂藝術品，絕非塞錢的市俗便宜感。每張鈔票都被溫柔對待，才是最高級的浪漫。\n\n' +
+  '【嚴格禁止】\n' +
+  '嚴禁粗俗地談論錢財、嚴禁使用平庸死板的罐頭字眼（如：這款花很好看之類的廢話）。文案必須自帶畫面感與社群渲染力。';
+
 function toggleKey() {
-    const el = document.getElementById('userApiKey');
-    el.type = el.type === 'password' ? 'text' : 'password';
+  var i = document.getElementById('apiKey');
+  i.type = i.type === 'password' ? 'text' : 'password';
+}
+
+function showToast(msg) {
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(function() { t.classList.remove('show'); }, 2200);
 }
 
 function renderContent(id, text) {
-    const el = document.getElementById(id);
-    el.innerHTML = '<div class="out-text"></div>';
-    const textEl = el.querySelector('.out-text');
+  var el = document.getElementById(id);
+  el.innerHTML = '<div class="out-text"></div>';
+  var textEl = el.querySelector('.out-text');
+  
+  // 比照姿彤 INDEX 的優雅還原法：安全解析出來後，再於前端將逸出雙引號美化為中文「」
+  var cleanText = text
+    .replace(/\\"/g, '"') 
+    .replace(/"([^"\s<>]+)"/g, '「$1」'); 
     
-    // 將 AI 回傳並正確解析出的轉義引號做網頁前端的視覺美化還原
-    const cleanText = text
-        .replace(/\\"/g, '"')
-        .replace(/"([^"\s<>]+)"/g, '「$1」');
-        
-    const html = cleanText
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/\n/g, '<br>');
-    textEl.innerHTML = html;
+  var html = cleanText
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/\n/g, '<br>');
+  textEl.innerHTML = html;
 }
 
-async function generate(type) {
-    const userKey = document.getElementById('userApiKey').value.trim();
-    if (!userKey) { alert('請先輸入您的 Gemini API Key！'); return; }
+function triggerGenerate(type) {
+  if (isLoading) return;
+  var key = document.getElementById('apiKey').value.trim();
+  if (!key) { alert('⚠️ 請填入您的 Gemini API Key！'); document.getElementById('apiKey').focus(); return; }
+  currentTopic = type;
+  
+  // 完美切換按鈕高亮狀態，消滅舊版 CSS 隱形遮擋錯誤
+  document.querySelectorAll('.topic-btn').forEach(function(b) { b.classList.remove('active'); b.classList.add('inactive'); });
+  var activeBtn = document.getElementById('btn-' + type);
+  activeBtn.classList.add('active');
+  activeBtn.classList.remove('inactive');
+  
+  doGenerate(key, type);
+}
 
-    document.querySelectorAll('.style-btn').forEach(b => { b.classList.remove('active'); b.classList.add('inactive'); b.disabled = true; });
-    document.getElementById('btn-' + type).classList.add('active');
-    document.getElementById('btn-' + type).classList.remove('inactive');
+async function doGenerate(apiKey, topic) {
+  isLoading = true;
+  var status = document.getElementById('statusBar');
+  var fbOut  = document.getElementById('fbContent');
+  var igOut  = document.getElementById('igContent');
+  var thOut  = document.getElementById('thContent');
 
-    const status = document.getElementById('statusBar');
-    const fbOut  = document.getElementById('out-fb');
-    const igOut  = document.getElementById('out-ig');
-    const thOut  = document.getElementById('out-threads');
+  status.style.display = 'block';
+  status.innerText = '✨ 友熙花苑 AI 矩陣文案平行運算中，請稍候...';
+  fbOut.innerHTML = '<div class="out-ph">深度故事版醞釀中...</div>';
+  igOut.innerHTML = '<div class="out-ph">視覺爆款版生成中...</div>';
+  thOut.innerHTML = '<div class="out-ph">犀利觀點版撰寫中...</div>';
 
-    status.style.display = 'block';
-    status.innerText = '✨ 姿彤總監系統文案生成中，請稍候...';
-    fbOut.innerText = '正在撰寫深度系統長文...';
-    igOut.innerText = '精煉條列版生成中...';
-    thOut.innerText = '強鉤子觀點醞釀中...';
+  var t = topics[topic];
+  var extra = topicExtra[topic] || '';
 
-    const prompt = `${PERSONA}\n\n${PROMPTS[type]}\n\n請根據指定方向嚴格產出三平台完整貼文。`;
+  var userPrompt = brandDNA +
+    extra + '\n\n' +
+    '現在根據主題：【' + t.label + '】— ' + t.desc + '\n\n' +
+    '請嚴格分別產出三個平台的完整貼文：\n' +
+    '1. Facebook 深度版（420~550字）：開頭先點出傳統送禮的尷尬痛點（怕浪費、沒創意、難照顧），再對比友熙花苑高訂鈔票花的尊榮感與實用性，並融入「純手工排單，不折損真鈔、不留痕跡」的工藝信任背書，結尾自然引導私訊官方LINE討論客製款式。\n' +
+    '2. Instagram 視覺版（200~280字）：採用「首句痛點Hook + 條列式爽點 + 視覺標籤斷句」公式，大量使用奢華時尚 Emoji（如✨💸🌹👑）製造朋友圈霸屏的視覺層次與打卡畫面感。\n' +
+    '3. Threads 觀點版（120~160字）：開頭必須是一句能讓人瘋狂@另一半或含淚轉發的求生慾／共鳴金句，犀利幽默、引發強烈共鳴。\n\n' +
+    '三篇文案結尾都加上：#DearYuFlower #友熙花苑 #鈔票花束 #有錢花';
 
-    try {
-        const res = await fetch(
-            `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${userKey}`,
-            {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ 
-                    contents: [{ parts: [{ text: prompt }] }],
-                    generationConfig: {
-                        temperature: 0.85,
-                        maxOutputTokens: 2500,
-                        responseMimeType: 'application/json',
-                        // 頂級強固防禦：啟用官方 Schema 機制，直接封死 JSON 語法格式缺陷
-                        responseSchema: {
-                            type: "OBJECT",
-                            properties: {
-                                fb: { type: "STRING", description: "Facebook 深度系統長文" },
-                                ig: { type: "STRING", description: "Instagram 精煉條列版" },
-                                threads: { type: "STRING", description: "Threads 強鉤子短文" }
-                            },
-                            required: ["fb", "ig", "threads"]
-                        }
-                    }
-                })
+  try {
+    var res = await fetch(
+      'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=' + apiKey,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: userPrompt }] }],
+          generationConfig: {
+            temperature: 0.85,
+            maxOutputTokens: 2500,
+            responseMimeType: 'application/json',
+            // 使用完全一致的 responseSchema 機制，直接從底層鎖死欄位
+            responseSchema: {
+              type: "OBJECT",
+              properties: {
+                fb: { type: "STRING", description: "Facebook 深度版文案" },
+                ig: { type: "STRING", description: "Instagram 視覺版文案" },
+                th: { type: "STRING", description: "Threads 觀點版文案" }
+              },
+              required: ["fb", "ig", "th"]
             }
-        );
-        
-        if (!res.ok) {
-            const errorData = await res.json().catch(function() { return {}; });
-            const errMsg = errorData.error ? errorData.error.message : 'HTTP 狀態碼: ' + res.status;
-            throw new Error(errMsg);
-        }
+          }
+        })
+      }
+    );
 
-        const data = await res.json();
-        if (!data.candidates || !data.candidates[0] || !data.candidates[0].content) {
-            throw new Error('AI 沒有回傳有效內容，請檢查金鑰或重試。');
-        }
-
-        let raw = data.candidates[0].content.parts[0].text.trim();
-        
-        // 精準剝離外層 Markdown 殘留外殼
-        if (raw.startsWith('```')) {
-            raw = raw.replace(/^
-```json\s*/i, '').replace(/```$/, '').trim();
-        }
-
-        let parsed;
-        try {
-            parsed = JSON.parse(raw);
-        } catch(parseErr) {
-            console.error('【JSON 原始解析失敗字串】:', raw);
-            throw new Error('JSON 解析流產，請再次點擊按鈕重試。');
-        }
-
-        if (!parsed.fb || !parsed.ig || !parsed.threads) {
-            throw new Error('欄位讀取失敗');
-        }
-
-        renderContent('out-fb', parsed.fb);
-        renderContent('out-ig', parsed.ig);
-        renderContent('out-threads', parsed.threads);
-        status.style.display = 'none';
-
-    } catch (err) {
-        console.error(err);
-        status.style.display = 'none';
-        fbOut.innerText = igOut.innerText = thOut.innerText = '❌ 發生錯誤，請再試一次';
-        if (err.message.includes('API_KEY_INVALID') || err.message.includes('not found') || err.message.includes('Key')) {
-            alert('【金鑰無效】\n請重新確認您的 API Key，並注意複製時有無包含多餘空格。');
-        } else if (err.message.includes('RESOURCE_EXHAUSTED')) {
-            alert('【頻率限制】\n免費通道次數限制，請稍候 60 秒再按一次。');
-        } else {
-            alert('【發生非預期異常】\n' + err.message);
-        }
-    } finally {
-        document.querySelectorAll('.style-btn').forEach(b => b.disabled = false);
+    if (!res.ok) {
+      var errorData = await res.json().catch(function() { return {}; });
+      var errMsg = errorData.error ? errorData.error.message : 'HTTP 狀態碼: ' + res.status;
+      throw new Error(errMsg);
     }
+
+    var data = await res.json();
+
+    if (!data.candidates || !data.candidates[0] || !data.candidates[0].content) {
+      throw new Error('AI 沒有回傳任何有效內容，請檢查金鑰或重試。');
+    }
+
+    var raw = data.candidates[0].content.parts[0].text.trim();
+
+    // 完美剝離 Markdown 標籤外殼
+    if (raw.startsWith('```')) {
+      raw = raw.replace(/^
+```json\s*/i, '').replace(/```$/, '').trim();
+    }
+
+    var parsed;
+    try {
+      parsed = JSON.parse(raw);
+    } catch(parseErr) {
+      console.error('【JSON 原始解析失敗字串】:', raw);
+      throw new Error('JSON 解析流產，請再次點擊按鈕重試。');
+    }
+
+    if (!parsed.fb || !parsed.ig || !parsed.th) {
+      throw new Error('欄位讀取失敗');
+    }
+
+    renderContent('fbContent', parsed.fb);
+    renderContent('igContent', parsed.ig);
+    renderContent('thContent', parsed.th);
+    status.style.display = 'none';
+    showToast('✦ 三平台文案生成完成！');
+
+  } catch(err) {
+    console.error('【系統崩潰偵錯】:', err);
+    status.style.display = 'none';
+    fbOut.innerHTML = igOut.innerHTML = thOut.innerHTML = '<div class="out-text" style="color:#e57373; font-size:0.78rem; line-height:1.8; padding:8px 0;">❌ 發生錯誤，請再試一次</div>';
+    
+    if (err.message.includes('API_KEY_INVALID') || err.message.includes('not found') || err.message.includes('Key')) {
+      alert('【金鑰無效】\n請重新確認您的 API Key，並注意複製時有無包含多餘空格。');
+    } else if (err.message.includes('RESOURCE_EXHAUSTED')) {
+      alert('【頻率限制】\n免費通道次數限制，請稍候 60 秒再按一次。');
+    } else {
+      alert('【錯誤原因】\n' + err.message);
+    }
+  } finally {
+    isLoading = false;
+  }
 }
 
 function copyCol(id, btn) {
-    const text = document.getElementById(id).innerText;
-    if (!text || text.includes('...') || text.startsWith('❌') || text.startsWith('點擊')) return;
-    navigator.clipboard.writeText(text).then(() => {
-        const orig = btn.innerText;
-        btn.innerText = '✓ 已複製';
-        setTimeout(() => btn.innerText = orig, 2000);
-    });
+  var text = document.getElementById(id).innerText;
+  if (!text || text.indexOf('開始生成') >= 0 || text.indexOf('❌') >= 0 || text.indexOf('醞釀中') >= 0) {
+    showToast('尚無內容可複製'); return;
+  }
+  navigator.clipboard.writeText(text).then(function() {
+    var orig = btn.textContent;
+    btn.textContent = '已複製 ✓';
+    btn.classList.add('ok');
+    setTimeout(function() { btn.textContent = orig; btn.classList.remove('ok'); }, 1500);
+    showToast('已複製到剪貼簿 ✓');
+  });
 }
 </script>
 </body>
