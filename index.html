@@ -21,7 +21,7 @@
         .left-card { background: #fff; border-radius: 36px; padding: 28px 24px; box-shadow: 0 4px 24px rgba(249,115,22,0.08); border: 1px solid rgba(249,115,22,0.08); }
 
         /* API Key */
-        .api-wrap { background: #fff8f3; border: 1.5px solid #fde8d0; border-radius: 16px; padding: 14px 16px; margin-bottom: 24px; }
+        .api-wrap { background: #fff8f3; border: 1.5px solid #fde8d0; border-radius: 16px; padding: 14px 16px; margin-bottom: 24px; position: relative; }
         .api-label { font-size: 12px; font-weight: 900; color: #f97316; margin-bottom: 8px; }
         .api-row { display: flex; gap: 8px; }
         .api-input { flex: 1; padding: 10px 14px; border: 1.5px solid #e2e8f0; border-radius: 12px; font-size: 13px; background: #fff; color: #2d3748; letter-spacing: 2px; font-family: inherit; transition: all 0.2s; }
@@ -34,7 +34,7 @@
         /* 風格選單 */
         .menu-header { font-size: 20px; font-weight: 900; color: #2d3748; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
         .style-list { display: flex; flex-direction: column; gap: 14px; margin-bottom: 28px; }
-        .style-btn { width: 100%; padding: 22px 20px; border-radius: 22px; font-size: 17px; font-weight: 900; font-family: inherit; cursor: pointer; transition: all 0.25s; text-align: center; border: none; line-height: 1.3; }
+        .style-btn { width: 100%; padding: 22px 20px; border-radius: 22px; font-size: 17px; font-weight: 900; font-family: inherit; cursor: pointer; transition: all 0.25s; text-align: center; border: none; line-height: 1.3; position: relative; z-index: 10; }
         .style-btn.inactive { background: #f5f5f7; color: #2d3748; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
         .style-btn.inactive:hover { background: #fff; box-shadow: 0 4px 16px rgba(249,115,22,0.15); color: #f97316; }
         .style-btn.active { background: #f97316; color: #fff; box-shadow: 0 6px 24px rgba(249,115,22,0.4); transform: translateY(-1px); }
@@ -45,7 +45,7 @@
         .tools-row { display: flex; gap: 8px; margin-bottom: 6px; }
         .tool-link { flex: 1; display: flex; align-items: center; justify-content: center; gap: 5px; padding: 11px 6px; border-radius: 14px; font-size: 13px; font-weight: 800; text-decoration: none; color: #fff; transition: all 0.2s; }
         .tool-link:hover { transform: translateY(-2px); filter: brightness(1.1); }
-        .t-gemini  { background: linear-gradient(135deg,#4285F4,#1a6cf5); box-shadow: 0 3px 12px rgba(66,133,244,0.3); }
+        .t-gemini   { background: linear-gradient(135deg,#4285F4,#1a6cf5); box-shadow: 0 3px 12px rgba(66,133,244,0.3); }
         .t-chatgpt { background: linear-gradient(135deg,#10a37f,#0d8c6b); box-shadow: 0 3px 12px rgba(16,163,127,0.3); }
         .t-fb      { background: linear-gradient(135deg,#1877f2,#0a5dc2); box-shadow: 0 3px 12px rgba(24,119,242,0.3); }
         .t-ig      { background: linear-gradient(135deg,#f58529,#dd2a7b,#8134af); box-shadow: 0 3px 12px rgba(221,42,123,0.3); }
@@ -68,7 +68,8 @@
         .n-threads { color: #111; }
         .copy-btn { background: #fff; border: 1.5px solid #e2e8f0; border-radius: 20px; padding: 4px 14px; font-size: 11px; font-weight: 900; color: #a0aec0; cursor: pointer; font-family: inherit; transition: all 0.2s; }
         .copy-btn:hover { background: #f97316; color: #fff; border-color: #f97316; }
-        .output-box { flex: 1; background: #fdfaf7; border: 1.5px solid #edf2f7; border-radius: 14px; padding: 14px; font-size: 13.5px; line-height: 1.75; white-space: pre-wrap; color: #4a5568; overflow-y: auto; min-height: 280px; }
+        .output-box { flex: 1; background: #fdfaf7; border: 1.5px solid #edf2f7; border-radius: 14px; padding: 14px; font-size: 13.5px; line-height: 1.75; white-space: pre-wrap; color: #4a5568; overflow-y: auto; min-height: 280px; word-break: break-word; }
+        .out-text { font-size: 13.5px; color: #4a5568; line-height: 1.8; }
     </style>
 </head>
 <body>
@@ -174,6 +175,24 @@ function toggleKey() {
     el.type = el.type === 'password' ? 'text' : 'password';
 }
 
+function renderContent(id, text) {
+    const el = document.getElementById(id);
+    el.innerHTML = '<div class="out-text"></div>';
+    const textEl = el.querySelector('.out-text');
+    
+    // 將 AI 回傳並正確解析出的轉義引號做網頁前端的視覺美化還原
+    const cleanText = text
+        .replace(/\\"/g, '"')
+        .replace(/"([^"\s<>]+)"/g, '「$1」');
+        
+    const html = cleanText
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/\n/g, '<br>');
+    textEl.innerHTML = html;
+}
+
 async function generate(type) {
     const userKey = document.getElementById('userApiKey').value.trim();
     if (!userKey) { alert('請先輸入您的 Gemini API Key！'); return; }
@@ -193,7 +212,7 @@ async function generate(type) {
     igOut.innerText = '精煉條列版生成中...';
     thOut.innerText = '強鉤子觀點醞釀中...';
 
-    const prompt = `${PERSONA}\n\n${PROMPTS[type]}\n\n請只回傳 JSON 格式，不要任何 Markdown 標記或說明文字：\n{"fb":"完整FB文案","ig":"完整IG文案含emoji與hashtag","threads":"完整Threads文案"}`;
+    const prompt = `${PERSONA}\n\n${PROMPTS[type]}\n\n請根據指定方向嚴格產出三平台完整貼文。`;
 
     try {
         const res = await fetch(
@@ -201,36 +220,73 @@ async function generate(type) {
             {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+                body: JSON.stringify({ 
+                    contents: [{ parts: [{ text: prompt }] }],
+                    generationConfig: {
+                        temperature: 0.85,
+                        maxOutputTokens: 2500,
+                        responseMimeType: 'application/json',
+                        // 頂級強固防禦：啟用官方 Schema 機制，直接封死 JSON 語法格式缺陷
+                        responseSchema: {
+                            type: "OBJECT",
+                            properties: {
+                                fb: { type: "STRING", description: "Facebook 深度系統長文" },
+                                ig: { type: "STRING", description: "Instagram 精煉條列版" },
+                                threads: { type: "STRING", description: "Threads 強鉤子短文" }
+                            },
+                            required: ["fb", "ig", "threads"]
+                        }
+                    }
+                })
             }
         );
-        const data = await res.json();
-
-        if (data.error) {
-            if (data.error.code === 429) throw new Error('RATE_LIMIT');
-            if (data.error.code === 400 || data.error.code === 403) throw new Error('KEY_INVALID');
-            throw new Error(data.error.message);
+        
+        if (!res.ok) {
+            const errorData = await res.json().catch(function() { return {}; });
+            const errMsg = errorData.error ? errorData.error.message : 'HTTP 狀態碼: ' + res.status;
+            throw new Error(errMsg);
         }
 
-        let raw = data.candidates[0].content.parts[0].text;
-        raw = raw.replace(/```json|```/gi, '').trim();
-        const result = JSON.parse(raw);
+        const data = await res.json();
+        if (!data.candidates || !data.candidates[0] || !data.candidates[0].content) {
+            throw new Error('AI 沒有回傳有效內容，請檢查金鑰或重試。');
+        }
 
-        fbOut.innerText = result.fb      || '生成失敗，請再試一次';
-        igOut.innerText = result.ig      || '生成失敗，請再試一次';
-        thOut.innerText = result.threads || '生成失敗，請再試一次';
+        let raw = data.candidates[0].content.parts[0].text.trim();
+        
+        // 精準剝離外層 Markdown 殘留外殼
+        if (raw.startsWith('```')) {
+            raw = raw.replace(/^
+```json\s*/i, '').replace(/```$/, '').trim();
+        }
+
+        let parsed;
+        try {
+            parsed = JSON.parse(raw);
+        } catch(parseErr) {
+            console.error('【JSON 原始解析失敗字串】:', raw);
+            throw new Error('JSON 解析流產，請再次點擊按鈕重試。');
+        }
+
+        if (!parsed.fb || !parsed.ig || !parsed.threads) {
+            throw new Error('欄位讀取失敗');
+        }
+
+        renderContent('out-fb', parsed.fb);
+        renderContent('out-ig', parsed.ig);
+        renderContent('out-threads', parsed.threads);
         status.style.display = 'none';
 
     } catch (err) {
         console.error(err);
         status.style.display = 'none';
         fbOut.innerText = igOut.innerText = thOut.innerText = '❌ 發生錯誤，請再試一次';
-        if (err.message === 'KEY_INVALID') {
-            alert('【金鑰無效】\n請重新去 aistudio.google.com 申請新的 API Key，確認複製時沒有多餘空格。');
-        } else if (err.message === 'RATE_LIMIT') {
-            alert('【頻率限制】\n請等 60 秒後再按一次，免費通道每分鐘有次數限制。');
+        if (err.message.includes('API_KEY_INVALID') || err.message.includes('not found') || err.message.includes('Key')) {
+            alert('【金鑰無效】\n請重新確認您的 API Key，並注意複製時有無包含多餘空格。');
+        } else if (err.message.includes('RESOURCE_EXHAUSTED')) {
+            alert('【頻率限制】\n免費通道次數限制，請稍候 60 秒再按一次。');
         } else {
-            alert('【錯誤訊息】' + err.message + '\n請截圖傳給我看。');
+            alert('【發生非預期異常】\n' + err.message);
         }
     } finally {
         document.querySelectorAll('.style-btn').forEach(b => b.disabled = false);
